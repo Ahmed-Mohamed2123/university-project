@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>view all</title>
+
+    <link rel="stylesheet" href="./../../css/style.css">
+    <link rel="stylesheet" href="./../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="./../../css/all.css">
+</head>
+<body>
+
+<!--    start header  -->
+<div class="header" id="header">
+    <div class="container-fluid">
+        <div class="header-content">
+            <div class="header-content-left">
+                <p class="mb-0 project-name">
+                    <a href="./../../index.html" class="text-decoration-none">Admin Panel</a>
+                </p>
+            </div>
+
+            <div class="header-content-right">
+                <!-- toggle button -->
+                <span class="toggle" onclick="openSidebar()">
+                            <svg style="cursor: pointer;" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.5625 2.63462H18.4375C18.9322 2.63462 19.25 2.16174 19.25 1.69231C19.25 1.22288 18.9322 0.75 18.4375 0.75H1.5625C1.06775 0.75 0.75 1.22288 0.75 1.69231C0.75 2.16174 1.06775 2.63462 1.5625 2.63462Z" fill="black" stroke="black" stroke-width="0.5"/>
+                                <path d="M19.25 7.23089V7.23085C19.2499 6.76146 18.9322 6.28857 18.4375 6.28857H6.625C6.13025 6.28857 5.8125 6.76146 5.8125 7.23089C5.8125 7.70031 6.13025 8.1732 6.625 8.1732H18.4375C18.9323 8.1732 19.25 7.70031 19.25 7.23089Z" fill="black" stroke="black" stroke-width="0.5"/>
+                                <path d="M18.4375 11.8269H1.5625C1.06775 11.8269 0.75 12.2998 0.75 12.7692C0.75 13.2386 1.06775 13.7115 1.5625 13.7115H18.4375C18.9322 13.7115 19.25 13.2386 19.25 12.7692C19.25 12.2998 18.9322 11.8269 18.4375 11.8269Z" fill="black" stroke="black" stroke-width="0.5"/>
+                                <path d="M18.4375 17.3655H10.8437C10.349 17.3655 10.0312 17.8384 10.0312 18.3078C10.0312 18.7772 10.349 19.2501 10.8437 19.2501H18.4375C18.9322 19.2501 19.25 18.7772 19.25 18.3078C19.25 17.8384 18.9322 17.3655 18.4375 17.3655Z" fill="black" stroke="black" stroke-width="0.5"/>
+                            </svg>
+                        </span>
+
+                <div class="options">
+                    <!-- profile options -->
+                    <div class="profile-info d-flex align-items-center pointer-event" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <p class="username">Username</p>
+                        <img src="./../../images/curve-down-arrow.png" alt="">
+                    </div>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">View my profile</a></li>
+                        <li><a class="dropdown-item" href="#"><button class="btn btn-danger w-100">Logout</button></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    end header    -->
+
+<!--  start main    -->
+<div class="main" id="main">
+
+</div>
+<!--  End main    -->
+
+<!--    start sidebar    -->
+<div id="sidebar"  class="sidebar">
+    <button onclick="closeSidebar()" class="btn-close"></button>
+
+    <div class="logo">
+        <img src="./../../images/logo.png" alt="">
+    </div>
+
+    <div class="sidebar-content">
+        <div class="item">
+            <div class="item-content">
+                <a href="./index.html" class="responsive main-item-text"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-content" id="dropdownMenuSchools" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="responsive main-item-text"><i class="fa-solid fa-school"></i> Schools</p>
+                <img class="arrow" src="./../../images/arrow.png" alt="">
+            </div>
+
+            <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+                <a href="./../../admin/schools/add.html">Add new school</a>
+                <a href="./../../admin/schools/viewAll.html">View school</a>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="item-content" id="dropdownMenuStudents" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> fathers</p>
+                <img class="arrow" src="./../../images/arrow.png" alt="">
+            </div>
+            <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuStudents">
+                <a href="../fathers/add.html">Add new Father</a>
+                <a href="../fathers/viewAll.html">View fathers</a>
+            </ul>
+        </div>
+
+
+        <div class="item">
+            <div class="item-content" id="dropdownMenuEmployees" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="responsive main-item-text"><i class="fa-solid fa-user-group"></i> Employees</p>
+                <img class="arrow" src="./../../images/arrow.png" alt="">
+            </div>
+            <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuEmployees">
+                <a href="./../../admin/Employees/add.html">Add new employee</a>
+                <a href="./../../admin/Employees/viewAll.html">View employees</a>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="item-content" id="dropdownMenuResults" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="responsive main-item-text"><i class="fa-solid fa-graduation-cap"></i> Results</p>
+                <img class="arrow" src="./../../images/arrow.png" alt="">
+            </div>
+            <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuResults">
+                <a href="./../../admin/results/add.html">Add new result</a>
+                <a href="./../../admin/schools/viewAll.html">View results</a>
+            </ul>
+        </div>
+
+
+        <div class="item">
+            <div class="item-content" id="dropdownMenuSubjects" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="responsive main-item-text"><i class="fa-solid fa-book"></i> Subjects</p>
+                <img class="arrow" src="./../../images/arrow.png" alt="">
+            </div>
+            <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuSubjects">
+                <a href="./../../admin/subjects/add.html">Add new subject</a>
+                <a href="./../../admin/subjects/viewAll.html">View subjects</a>
+            </ul>
+        </div>
+
+
+        <div class="item">
+            <div class="item-content" id="dropdownMenuPayments" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="responsive main-item-text"><i class="fa-solid fa-money-bill-1-wave"></i> Payments</p>
+                <img class="arrow" src="./../../images/arrow.png" alt="">
+            </div>
+            <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuPayments">
+                <a href="./../../admin/payments/viewAll.html">View All payments</a>
+            </ul>
+        </div>
+
+
+        <div class="item">
+            <div class="item-content" id="dropdownMenuOrders" data-bs-toggle="dropdown" aria-expanded="false">
+                <p class="responsive main-item-text"><i class="fa-solid fa-list"></i> orders</p>
+                <img class="arrow" src="./../../images/arrow.png" alt="">
+            </div>
+            <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuOrders">
+                <a href="./../../admin/orders/add.html">Add new order</a>
+                <a href="./../../admin/orders/viewAll.html">View orders</a>
+            </ul>
+        </div>
+
+        <div class="item d-lg-none">
+            <div class="item-content">
+                <p class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> View my profile</p>
+            </div>
+        </div>
+
+        <div class="item d-lg-none">
+            <div class="item-content">
+                <p class="responsive main-item-text w-100">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--    end sidebar    -->
+
+<script src="./../../js/popper.min.js"></script>
+<script src="./../../js/bootstrap.min.js"></script>
+<script src="./../../js/all.js"></script>
+<script src="./../../js/main.js"></script>
+<script src="./../../js/sidenav.js"></script>
+</body>
+</html>
