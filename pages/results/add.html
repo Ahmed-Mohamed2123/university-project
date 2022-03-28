@@ -5,9 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>view all</title>
+    <title>add school</title>
 
     <link rel="stylesheet" href="./../../css/style.css">
+    <link rel="stylesheet" href="./../../css/result.css">
     <link rel="stylesheet" href="./../../css/bootstrap.min.css">
     <link rel="stylesheet" href="./../../css/all.css">
 </head>
@@ -19,7 +20,7 @@
         <div class="header-content">
             <div class="header-content-left">
                 <p class="mb-0 project-name">
-                    <a href="./../../index.html" class="text-decoration-none">Admin Panel</a>
+                    <a href="./../../index.html" class="text-decoration-none">project_name</a>
                 </p>
             </div>
 
@@ -54,7 +55,74 @@
 
 <!--  start main    -->
 <div class="main" id="main">
+    <div class="add-result p-3">
+        <h3 class="mb-0 text-white">Add new result</h3>
+        <hr class="bg-white">
+        <form>
+            <div class="mb-2">
+                <input
+                        class="form-control"
+                        type="text"
+                        name="student_name"
+                        placeholder="enter your student name" >
+            </div>
 
+            <div class="mb-2">
+                <input
+                        class="form-control"
+                        name="class_room"
+                        placeholder="enter your class room" >
+            </div>
+
+            <div class="mb-2">
+                <input
+                        class="form-control"
+                        name="class_room"
+                        placeholder="enter your semester" >
+            </div>
+
+            <div class="mb-2">
+                <input
+                        class="form-control"
+                        name="class_room"
+                        placeholder="enter your school_year" >
+            </div>
+
+            <div class="mb-2">
+                <input
+                        class="form-control"
+                        name="class_room"
+                        placeholder="enter your sitting number" >
+            </div>
+
+            <select class="form-select mb-2" aria-label="add subject">
+                <option selected>add subject</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+
+            <select class="form-select mb-2" aria-label="add subject">
+                <option selected>add school</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+
+            <div class="d-flex justify-content-between">
+                <button
+                        class="btn btn-danger"
+                        type="submit">save</button>
+
+                <button
+                        class="btn btn-primary"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">add sheet excel</button>
+            </div>
+
+        </form>
+    </div>
 </div>
 <!--  End main    -->
 
@@ -69,7 +137,7 @@
     <div class="sidebar-content">
         <div class="item">
             <div class="item-content">
-                <a href="./index.html" class="responsive main-item-text"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="./../../index.html" class="responsive main-item-text"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
             </div>
         </div>
 
@@ -80,19 +148,18 @@
             </div>
 
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
-                <a href="./../../admin/schools/add.html">Add new school</a>
-                <a href="./../../admin/schools/viewAll.html">View school</a>
+                <a href="../schools/add.html">Add new school</a>
+                <a href="../schools/viewAll.html">View school</a>
             </ul>
         </div>
 
         <div class="item">
             <div class="item-content" id="dropdownMenuStudents" data-bs-toggle="dropdown" aria-expanded="false">
-                <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> fathers</p>
+                <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> parents</p>
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuStudents">
-                <a href="../fathers/add.html">Add new Father</a>
-                <a href="../fathers/viewAll.html">View fathers</a>
+                <a href="../parents/viewAll.html">View parents</a>
             </ul>
         </div>
 
@@ -103,8 +170,7 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuEmployees">
-                <a href="./../../admin/Employees/add.html">Add new employee</a>
-                <a href="./../../admin/Employees/viewAll.html">View employees</a>
+                <a href="../Employees/viewAll.html">View employees</a>
             </ul>
         </div>
 
@@ -114,8 +180,8 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuResults">
-                <a href="./../../admin/results/add.html">Add new result</a>
-                <a href="./../../admin/schools/viewAll.html">View results</a>
+                <a href="../results/add.html">Add new result</a>
+                <a href="../results/viewAll.html">View results</a>
             </ul>
         </div>
 
@@ -126,8 +192,8 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuSubjects">
-                <a href="./../../admin/subjects/add.html">Add new subject</a>
-                <a href="./../../admin/subjects/viewAll.html">View subjects</a>
+                <a href="../subjects/add.html">Add new subject</a>
+                <a href="../subjects/viewAll.html">View subjects</a>
             </ul>
         </div>
 
@@ -138,7 +204,7 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuPayments">
-                <a href="./../../admin/payments/viewAll.html">View All payments</a>
+                <a href="../payments/viewAll.html">View All payments</a>
             </ul>
         </div>
 
@@ -149,14 +215,32 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuOrders">
-                <a href="./../../admin/orders/add.html">Add new order</a>
-                <a href="./../../admin/orders/viewAll.html">View orders</a>
+                <a href="../orders/add.html">Add new order</a>
+                <a href="../orders/viewAll.html">View orders</a>
             </ul>
         </div>
 
         <div class="item d-lg-none">
             <div class="item-content">
                 <p class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> View my profile</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-content">
+                <a href="./../auth/login.html" class="responsive main-item-text"><i class="fa-solid fa-arrow-right-to-bracket"></i> login</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-content">
+                <a href="./../auth/register.html" class="responsive main-item-text"><i class="fa-solid fa-registered"></i> register</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-content">
+                <a href="./../info.html" class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> Information</a>
             </div>
         </div>
 
@@ -171,6 +255,33 @@
     </div>
 </div>
 <!--    end sidebar    -->
+
+
+<!-- Modals -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">add sheet excel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">.excel</label>
+                    <input
+                            class="form-control"
+                            type="file"
+                            id="formFile"
+                            accept=".xlsx, .xls, .csv">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="./../../js/popper.min.js"></script>
 <script src="./../../js/bootstrap.min.js"></script>

@@ -19,7 +19,7 @@
         <div class="header-content">
             <div class="header-content-left">
                 <p class="mb-0 project-name">
-                    <a href="./../../index.html" class="text-decoration-none">Admin Panel</a>
+                    <a href="./../../index.html" class="text-decoration-none">project_name</a>
                 </p>
             </div>
 
@@ -54,7 +54,116 @@
 
 <!--  start main    -->
 <div class="main" id="main">
+    <div class="ordersViewAll">
+        <table class="table table-hover" style="cursor: pointer">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">order status</th>
+                    <th scope="col">order date</th>
+                    <th scope="col">item price</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col">total price</th>
+                    <th scope="col">options</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <th scope="row">1</th>
+                <td>yes or no</td>
+                <td>2/2/2022</td>
+                <td>20</td>
+                <td>2</td>
+                <td>40</td>
+                <td>
+                    <!--  for parent  -->
+                    <button class="btn btn-danger">delete</button>
+                    <button class="btn btn-primary">edit</button>
+                    <!--  for employee  -->
+                    <button class="btn btn-primary">accept_order</button>
+                </td>
 
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="modalBody">
+                                <div class="content-modal">
+                                    <h3>Invoice</h3>
+                                    <hr>
+                                    <div class="invoice-info">
+                                        <div class="item d-flex justify-content-between">
+                                            <p class="lead">amount:_</p>
+                                            <p>10</p>
+                                        </div>
+                                        <div class="item d-flex justify-content-between">
+                                            <p class="lead">invoice.invoice_date:_</p>
+                                            <p>11/2/2022</p>
+                                        </div>
+                                        <div class="item d-flex justify-content-between">
+                                            <p class="lead">name parent:_</p>
+                                            <p>Ahmed Mohamed</p>
+                                        </div>
+                                        <div class="item d-flex justify-content-between">
+                                            <p class="lead">address</p>
+                                            <p>mansoura</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="invoice_total d-flex justify-content-between">
+                                        <p class="lead">invoice_total</p>
+                                        <p class="fw-bold">50</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="printInvoice(this)">print</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+            <tr>
+                <th scope="row">1</th>
+                <td>yes or no</td>
+                <td>5/2/2022</td>
+                <td>30</td>
+                <td>2</td>
+                <td>60</td>
+                <td>
+                    <!--  for parent  -->
+                    <button class="btn btn-danger">delete</button>
+                    <button class="btn btn-primary">edit</button>
+                    <!--  for employee  -->
+                    <button class="btn btn-primary">accept_order</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <nav class="d-flex justify-content-center" aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
 <!--  End main    -->
 
@@ -69,7 +178,7 @@
     <div class="sidebar-content">
         <div class="item">
             <div class="item-content">
-                <a href="./index.html" class="responsive main-item-text"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="./../../index.html" class="responsive main-item-text"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
             </div>
         </div>
 
@@ -80,19 +189,18 @@
             </div>
 
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
-                <a href="./../../admin/schools/add.html">Add new school</a>
-                <a href="./../../admin/schools/viewAll.html">View school</a>
+                <a href="../schools/add.html">Add new school</a>
+                <a href="../schools/viewAll.html">View school</a>
             </ul>
         </div>
 
         <div class="item">
             <div class="item-content" id="dropdownMenuStudents" data-bs-toggle="dropdown" aria-expanded="false">
-                <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> fathers</p>
+                <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> parents</p>
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuStudents">
-                <a href="../fathers/add.html">Add new Father</a>
-                <a href="../fathers/viewAll.html">View fathers</a>
+                <a href="../parents/viewAll.html">View parents</a>
             </ul>
         </div>
 
@@ -103,8 +211,7 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuEmployees">
-                <a href="./../../admin/Employees/add.html">Add new employee</a>
-                <a href="./../../admin/Employees/viewAll.html">View employees</a>
+                <a href="../Employees/viewAll.html">View employees</a>
             </ul>
         </div>
 
@@ -114,8 +221,8 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuResults">
-                <a href="./../../admin/results/add.html">Add new result</a>
-                <a href="./../../admin/schools/viewAll.html">View results</a>
+                <a href="../results/add.html">Add new result</a>
+                <a href="../results/viewAll.html">View results</a>
             </ul>
         </div>
 
@@ -126,8 +233,8 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuSubjects">
-                <a href="./../../admin/subjects/add.html">Add new subject</a>
-                <a href="./../../admin/subjects/viewAll.html">View subjects</a>
+                <a href="../subjects/add.html">Add new subject</a>
+                <a href="../subjects/viewAll.html">View subjects</a>
             </ul>
         </div>
 
@@ -138,7 +245,7 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuPayments">
-                <a href="./../../admin/payments/viewAll.html">View All payments</a>
+                <a href="../payments/viewAll.html">View All payments</a>
             </ul>
         </div>
 
@@ -149,14 +256,32 @@
                 <img class="arrow" src="./../../images/arrow.png" alt="">
             </div>
             <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuOrders">
-                <a href="./../../admin/orders/add.html">Add new order</a>
-                <a href="./../../admin/orders/viewAll.html">View orders</a>
+                <a href="../orders/add.html">Add new order</a>
+                <a href="../orders/viewAll.html">View orders</a>
             </ul>
         </div>
 
         <div class="item d-lg-none">
             <div class="item-content">
                 <p class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> View my profile</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-content">
+                <a href="./../auth/login.html" class="responsive main-item-text"><i class="fa-solid fa-arrow-right-to-bracket"></i> login</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-content">
+                <a href="./../auth/register.html" class="responsive main-item-text"><i class="fa-solid fa-registered"></i> register</a>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="item-content">
+                <a href="./../info.html" class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> Information</a>
             </div>
         </div>
 

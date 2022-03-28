@@ -19,7 +19,7 @@
                 <div class="header-content">
                     <div class="header-content-left">
                         <p class="mb-0 project-name">
-                            <a href="index.html" class="text-decoration-none">Admin Panel</a>
+                            <a href="index.html" class="text-decoration-none">project_name</a>
                         </p>
                     </div>
 
@@ -56,25 +56,17 @@
         <div class="main" id="main">
             <div class="container-fluid">
                 <div class="dashboard-content" id="dashboard-content">
-                    <div class="row text-center">
-                        <div class="col-md-4">
-                            <div class="content bg-success p-3">
-                                number of employees 6
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="content bg-secondary p-3">
-                                number of orders 5
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="content bg-primary p-3">
-                                number of schools 1
-                            </div>
-                        </div>
-                    </div>
+                   <div class="d-flex justify-content-around flex-wrap">
+                       <div class="content bg-dark">
+                           number of employees 6
+                       </div>
+                       <div class="content bg-dark">
+                           number of orders 5
+                       </div>
+                       <div class="content bg-dark">
+                           number of schools 1
+                       </div>
+                   </div>
 
                     <div class="background-image">
                         <img src="./images/background-image-.png" alt="">
@@ -106,19 +98,18 @@
                     </div>
 
                     <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
-                        <a href="./admin/schools/add.html">Add new school</a>
-                        <a href="./admin/schools/viewAll.html">View school</a>
+                        <a href="pages/schools/add.html">Add new school</a>
+                        <a href="pages/schools/viewAll.html">View school</a>
                     </ul>
                 </div>
 
                 <div class="item">
                     <div class="item-content" id="dropdownMenuStudents" data-bs-toggle="dropdown" aria-expanded="false">
-                        <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> fathers</p>
+                        <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> parents</p>
                         <img class="arrow" src="./images/arrow.png" alt="">
                     </div>
                     <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuStudents">
-                        <a href="admin/fathers/add.html">Add new Father</a>
-                        <a href="admin/fathers/viewAll.html">View fathers</a>
+                        <a href="pages/parents/viewAll.html">View parents</a>
                     </ul>
                 </div>
 
@@ -129,8 +120,7 @@
                         <img class="arrow" src="./images/arrow.png" alt="">
                     </div>
                     <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuEmployees">
-                        <a href="./admin/Employees/add.html">Add new employee</a>
-                        <a href="./admin/Employees/viewAll.html">View employees</a>
+                        <a href="pages/Employees/viewAll.html">View employees</a>
                     </ul>
                 </div>
 
@@ -140,8 +130,8 @@
                         <img class="arrow" src="./images/arrow.png" alt="">
                     </div>
                     <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuResults">
-                        <a href="./admin/results/add.html">Add new result</a>
-                        <a href="./admin/schools/viewAll.html">View results</a>
+                        <a href="pages/results/add.html">Add new result</a>
+                        <a href="pages/schools/viewAll.html">View results</a>
                     </ul>
                 </div>
 
@@ -152,8 +142,8 @@
                         <img class="arrow" src="./images/arrow.png" alt="">
                     </div>
                     <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuSubjects">
-                        <a href="./admin/subjects/add.html">Add new subject</a>
-                        <a href="./admin/subjects/viewAll.html">View subjects</a>
+                        <a href="pages/subjects/add.html">Add new subject</a>
+                        <a href="pages/subjects/viewAll.html">View subjects</a>
                     </ul>
                 </div>
 
@@ -164,7 +154,7 @@
                         <img class="arrow" src="./images/arrow.png" alt="">
                     </div>
                     <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuPayments">
-                        <a href="./admin/payments/viewAll.html">View All payments</a>
+                        <a href="pages/payments/viewAll.html">View All payments</a>
                     </ul>
                 </div>
 
@@ -175,14 +165,32 @@
                         <img class="arrow" src="./images/arrow.png" alt="">
                     </div>
                     <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuOrders">
-                        <a href="./admin/orders/add.html">Add new order</a>
-                        <a href="./admin/orders/viewAll.html">View orders</a>
+                        <a href="pages/orders/add.html">Add new order</a>
+                        <a href="pages/orders/viewAll.html">View orders</a>
                     </ul>
                 </div>
 
                 <div class="item d-lg-none">
                     <div class="item-content">
                         <p class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> View my profile</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-content">
+                        <a href="pages/auth/login.html" class="responsive main-item-text"><i class="fa-solid fa-arrow-right-to-bracket"></i> login</a>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-content">
+                        <a href="pages/auth/register.html" class="responsive main-item-text"><i class="fa-solid fa-registered"></i> register</a>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-content">
+                        <a href="pages/info.html" class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> Information</a>
                     </div>
                 </div>
 
@@ -203,10 +211,5 @@
         <script src="./js/all.js"></script>
         <script src="./js/sidenav.js"></script>
         <script src="./js/main.js"></script>
-
-        <script>
-            let topHeight = header.offsetHeight + 24;
-            main.style.height = `calc(100vh - ${topHeight}px)`;
-        </script>
     </body>
 </html>
