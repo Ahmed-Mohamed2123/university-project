@@ -1,15 +1,12 @@
+window.addEventListener('load', () => {
 
-if (
-    location.href.includes('index')
-    || location.href.includes('schools/add')
-    || location.href.includes('subjects/add')
-    || location.href.includes('/auth')
-    || location.href.includes('results/add')) {
+    const myAlert =document.getElementById('toast');//select id of toast
 
-    // net header height
-    let topHeight = header.offsetHeight + 24;
-    main.style.height = `calc(100vh - ${topHeight}px)`;
-}
+    if (myAlert) {
+        const bsAlert = new bootstrap.Toast(myAlert); // initialize it
+        bsAlert.show();
+    }
+});
 
 function printInvoice(ele) {
     const openWindow = window.open("", "title", "attributes");
@@ -42,3 +39,6 @@ function printInvoice(ele) {
         openWindow.close();
     }, 100);
 }
+
+
+

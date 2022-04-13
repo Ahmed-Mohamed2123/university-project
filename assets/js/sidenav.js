@@ -17,7 +17,6 @@ window.onload = () => {
 }
 
 window.onresize = () => {
-    header.style.width = `calc(100% - ${sidebar.style.width})`;
     if (window.innerWidth < 996) {
         whenInnerSmallWidth();
     } else {
