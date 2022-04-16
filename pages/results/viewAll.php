@@ -6,7 +6,7 @@
 
     function sqlQueries($limit, $student_name, $sitting_number, $semester, $school_id) {
         $conditionCount = "
-            WHERE 
+            WHERE
             `student_name` LIKE '%$student_name%' AND
             `sitting_number` LIKE '%$sitting_number%' AND
             `semester` LIKE '%$semester%' AND
@@ -15,39 +15,49 @@
         $conditionOrRestSql = "
                 LEFT JOIN school ON result.schoolId = school.id
                 LEFT JOIN subject ON result.subjectId = subject.id
-                WHERE 
+                WHERE
                 `student_name` LIKE '%$student_name%' AND
                 `sitting_number` LIKE '%$sitting_number%' AND
                 `semester` LIKE '%$semester%' AND
-                `schoolId` LIKE '%$school_id%' 
+                `schoolId` LIKE '%$school_id%'
             ";
 
-        return pagination('result', $limit, $conditionCount, $conditionOrRestSql);
+        return paginationResult('result', $limit, $conditionCount, $conditionOrRestSql);
     }
 
-    $student_name = NULL;
-    $sitting_number = NULL;
-    $semester = NULL;
-    $school_id = NULL;
 
+    unset(
+        $_SESSION["student_name"],
+        $_SESSION["sitting_number"],
+        $_SESSION["semester"],
+        $_SESSION["grade"],
+        $_SESSION["school_id"],
+    );
 
-    $x=1;
-    $limit = 5;
+    // search
+    $student_name = $_SESSION['student_name'] = sanitizeString($_GET['student_name']);
+    $sitting_number = $_SESSION['sitting_number'] = sanitizeInteger($_GET['sitting_number']);
+    $semester = $_SESSION['semester'] = sanitizeString($_GET['semester']);
+    $grade = $_SESSION['grade'] = sanitizeString($_GET['grade']);
+    $school_id = $_SESSION['school_id'] = $_GET['school_id'];
+
+    $x=0;
+    $limit = 1;
 
     $data_pagination = sqlQueries($limit, $student_name, $sitting_number, $semester, $school_id);
 
-    if (isset($_POST['submit'])) {
-        $student_name = sanitizeString($_POST['student_name']);
-        $sitting_number = sanitizeInteger($_POST['sitting_number']);
-        $semester = sanitizeString($_POST['semester']);
-        $school_id = $_POST['school_id'];
-
-        if ($school_id == 'NULL') {
-            $school_id = NULL;
+    $subject_data = [];
+    for ($i = 0; $i <= count($data_pagination['data']); $i++) {
+        if (!empty($data_pagination['data'][$i])) {
+            $students_names = $data_pagination['data'][$i]['student_name'];
+            $resultSql = "SELECT `subject_name`, `degree`, `max_degree`, `min_degree` FROM `result` LEFT JOIN subject ON result.subjectId = subject.id WHERE `student_name` = '$students_names'";
+            $subject_data[] = getResults($resultSql);
         }
-
-        $data_pagination = $data_pagination = sqlQueries($limit, $student_name, $sitting_number, $semester, $school_id);;
     }
+
+    $total = [];
+    $total_max_degree = [];
+
 ?>
 
 <!--  start main    -->
@@ -55,22 +65,93 @@
     <div class="resultsViewAll">
 
         <div class="search">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchModal">custom search</button>
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get">
+                <input type="hidden" name="page" value="1">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <select name="school_id" class="form-select mb-2" aria-label="Default select example">
+                            <?php foreach (getRows('school') as $school) { ?>
+                                <option
+                                        value="<?php echo $school['id']; ?>"
+                                        <?php if (($school['id'] === $_SESSION['school_id']) || empty($_SESSION['school_id'])) {echo 'selected';} ?>
+                                        > <?php echo $school['school_name'];?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="semester" class="form-select mb-2" aria-label="Default select example">
+                            <option value="الفصل الدراسي الاول"  <?php if (('الفصل الدراسي الاول' === $_SESSION['semester']) || empty($_SESSION['semester'])) { echo 'selected'; } ?>>الفصل الدراسي الاول</option>
+                            <option value="الفصل الدراسي الثانى"  <?php if ('الفصل الدراسي الثانى' === $_SESSION['semester']) { echo 'selected'; } ?>>الفصل الدراسي الثانى</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <input value="<?php echo $_SESSION['student_name'];?>" type="text" name="student_name" class="form-control mb-2" placeholder="search by name">
+                    </div>
+                    <div class="col-md-6">
+                        <input value="<?php echo $_SESSION['sitting_number'];?>" type="number" name="sitting_number" class="form-control mb-2" placeholder="search by sitting_number">
+                    </div>
+                </div>
+
+
+                <div class="d-grid gap-2">
+                    <button
+                            class="btn btn-success"
+                            type="submit">search</button>
+                </div>
+            </form>
+            <br>
         </div>
 
-        <table class="table">
+        <table class="table table-bordered text-center" style="vertical-align: middle;">
             <thead>
-            <tr>
+            <tr style="vertical-align: middle;">
                 <th scope="col">#</th>
                 <th scope="col">student_name</th>
-                <th scope="col">semester</th>
-                <th scope="col">grade</th>
                 <th scope="col">school_year</th>
                 <th scope="col">sitting_number</th>
-                <th scope="col">degree</th>
-                <th scope="col">name subject</th>
-                <th scope="col">name school</th>
+                <th scope="col"></th>
+                <?php foreach ($subject_data[0] as $row) {  ?>
+                    <th scope="col">
+                        <?php echo $row['subject_name'];?>
+                    </th>
+                <?php } ?>
+                <th scope="col">total_degrees</th>
+                <th scope="col">percentage</th>
                 <th scope="col">options</th>
+            </tr>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">max_degree</th>
+                <?php foreach ($subject_data[0] as $row) {  ?>
+                    <th scope="col">
+                        <?php echo $row['max_degree']; ?>
+                    </th>
+                <?php } ?>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">min_degree</th>
+                <?php foreach ($subject_data[0] as $row) {  ?>
+                    <th scope="col">
+                        <?php $total_max_degree[] = $row['min_degree']; echo $row['min_degree'];?>
+                    </th>
+                <?php } ?>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -78,13 +159,15 @@
                     <tr>
                         <th scope="row"><?php echo $x; ?></th>
                         <td><?php echo $row['student_name']; ?></td>
-                        <td><?php echo $row['semester']; ?></td>
-                        <td><?php echo $row['grade']; ?></td>
                         <td><?php echo $row['school_year']; ?></td>
                         <td><?php echo $row['sitting_number']; ?></td>
-                        <td><?php echo $row['degree']; ?></td>
-                        <td><?php echo $row['subject_name']; ?></td>
-                        <td><?php echo $row['school_name']; ?></td>
+                        <td></td>
+                        <?php for ($t = 0; $t < count($subject_data[$x]); $t++) {  ?>
+                            <td><?php   $total[$t] = $subject_data[$x][$t]['degree']; echo $subject_data[$x][$t]['degree'];?></td>
+                        <?php } ?>
+                        <td><?php echo array_sum($total); ?></td>
+                        <td><?php echo floor((array_sum($total_max_degree) / array_sum($total)) * 100) . '%'; ?>;</td>
+
                         <td>
                             <button class="btn btn-primary">edit</button>
                             <button class="btn btn-danger">delete</button>
@@ -97,7 +180,8 @@
         <nav class="d-flex justify-content-center" aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a <?php ($data_pagination['currentPage'] == $data_pagination['firstPage'] ? print 'disabled="disabled"' : '')?> class="page-link" href="?page=<?php echo $data_pagination['firstPage'] ?>" tabindex="-1" aria-label="Previous">
+                    <a
+                        <?php ($data_pagination['currentPage'] == $data_pagination['firstPage'] ? print 'disabled="disabled"' : '')?> class="page-link" href="?page=<?php echo $data_pagination['firstPage'] ?>" tabindex="-1" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -105,7 +189,9 @@
                 <!-- Links of the pages with page number -->
                 <?php for($i = $data_pagination['start']; $i <= $data_pagination['end']; $i++) { ?>
                     <li class='page-item <?php ($i == $data_pagination['currentPage'] ? print 'active' : '')?>'>
-                        <a class='page-link' href='?page=<?php echo $i;?>'><?php echo $i;?></a>
+                        <a class='page-link'
+                           href='?page=<?php echo $i?>&school_id=<?php echo $_GET['school_id'];?>&semester=<?php echo $_GET['semester']; ?>&student_name=<?php echo $_GET['student_name']; ?>&sitting_number=<?php echo $_GET['sitting_number'];?>'
+                        ><?php echo $i;?></a>
                     </li>
                 <?php } ?>
 
@@ -120,36 +206,6 @@
 </div>
 <!--  End main    -->
 
-<!-- Modal search -->
-<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">custom search</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalBody">
-                    <div class="content-modal">
-                        <input type="text" name="student_name" class="form-control mb-2" placeholder="search by name">
-                        <input type="text" name="semester" class="form-control mb-2" placeholder="search by semester">
-                        <input type="number" name="sitting_number" class="form-control mb-2" placeholder="search by sitting_number">
-                        <select name="school_id" class="form-select mb-2" aria-label="Default select example">
-                            <option selected value="NULL">choose school</option>
-                            <?php foreach (getRows('school') as $school) { ?>
-                                <option value="<?php echo $school['id']; ?>"><?php echo $school['school_name'];?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="submit" type="button" class="btn btn-primary">search</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 <?php
     require BLP . 'shared/footer.php';

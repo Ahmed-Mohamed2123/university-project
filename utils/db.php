@@ -108,29 +108,48 @@ function getRow($sql) {
 }
 
 
-function getCountRows($table, $condition) {
+function getCountRows($itemsCount, $table, $condition) {
     global $conn;
-    $sql = "SELECT COUNT(*) AS `count` FROM `$table` $condition";
+    $sql = "SELECT COUNT($itemsCount) AS `count` FROM `$table` $condition";
     $result = mysqli_query($conn, $sql);
     $res = mysqli_fetch_assoc($result);
     return $res['count'];
 }
 
+// For all pages
 function pagination($table, $limit, $conditionCount, $conditionOrRestSql) {
-    global $conn;
-
-    $totalRows = getCountRows($table, $conditionCount);
-
-    // If you press the next button => href="?page=1"
     if (isset($_GET['page']) && !empty($_GET['page'])) {
         $currentPage = $_GET['page'];
     } else {
         $currentPage = 1;
     }
+    $startFrom = ($currentPage * $limit) - $limit;
+    // fetch data with specific limit
+    // LIMIT offset, count
+    $tableSQL = "SELECT DISTINCT * FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
+    return paginationOperations("*", $table, $limit, $conditionCount, $conditionOrRestSql, $tableSQL, $currentPage);
+}
 
+// for result page
+function paginationResult($table, $limit, $conditionCount, $conditionOrRestSql) {
+    if (isset($_GET['page']) && !empty($_GET['page'])) {
+        $currentPage = $_GET['page'];
+    } else {
+        $currentPage = 1;
+    }
     // Suppose $currentPage = 2 and $limit = 4 =>>>> 2*4 - 4 = 4
     // $startFrom => offset
     $startFrom = ($currentPage * $limit) - $limit;
+    // fetch data with specific limit
+    // LIMIT offset, count
+    $tableSQL = "SELECT DISTINCT(`student_name`), `semester`, `grade`, `school_year`, `sitting_number`, `school_name` FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
+    return paginationOperations("DISTINCT `student_name`", $table, $limit, $conditionCount, $conditionOrRestSql, $tableSQL, $currentPage);
+}
+
+function paginationOperations($itemsCount, $table, $limit, $conditionCount, $conditionOrRestSql, $data_sql, $currentPage) {
+    global $conn;
+    $totalRows = getCountRows($itemsCount, $table, $conditionCount);
+
     // ceil(1.4) => 1 &&& ceil(0.7) => 1
     $totalPages = ceil($totalRows / $limit);
 
@@ -142,8 +161,8 @@ function pagination($table, $limit, $conditionCount, $conditionOrRestSql) {
 
     // fetch data with specific limit
     // LIMIT offset, count
-    $tableSQL = "SELECT * FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
-    $result = mysqli_query($conn, $tableSQL);
+    $result = mysqli_query($conn, $data_sql);
+    $data = [];
     $data = [];
 
     while($row = mysqli_fetch_assoc($result)){
@@ -182,3 +201,23 @@ function pagination($table, $limit, $conditionCount, $conditionOrRestSql) {
         'end' => $end
     ];
 }
+
+function getResults($sql) {
+    global $conn;
+
+    $result = mysqli_query($conn, $sql);
+    if(!$result)
+    {
+        echo mysqli_error($conn);
+    }
+    $rows = [];
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result))
+        {
+            $rows[] = $row;
+        }
+
+    }
+    return $rows;
+}
+
