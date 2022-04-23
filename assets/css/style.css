@@ -251,7 +251,7 @@ html body {
   }
 }
 
-.index, .school, .subject, .auth, .result, .parent {
+.index, .school, .subject, .auth, .result, .parent, .profile, .checkout {
   height: calc(100vh - 94px);
 }
 /*end main*/
@@ -272,4 +272,27 @@ a[disabled="disabled"] {
   pointer-events: none;
   background-color: #333;
   color: #FFF;
+}
+
+
+.StripeElement {
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+
+  height: 50px;
+
+  border: 1px solid transparent;
+  background-color: white;
+  border-radius: 4px;
+
+  transition: box-shadow 160ms;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }

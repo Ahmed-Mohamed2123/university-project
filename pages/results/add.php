@@ -4,8 +4,15 @@
     require BLP . 'shared/header.php';
     require BL . 'utils/validate.php';
 
+    if ($_SESSION['role'] === '0') {
+        header('location:' . BASEURLPAGES . 'index.php');
+    } elseif (!isset($_SESSION['role'])) {
+        header('location:' . BASEURLPAGES . 'auth/login.php');
+    }
+
     require_once BL . '/vendor/autoload.php';
     include BL . '/vendor/phpoffice/phpexcel/Classes/PHPExcel/IOFactory.php';
+
 
 
     $subjects = getRows('subject');
@@ -19,6 +26,7 @@
         $sitting_number = sanitizeString($_POST['sitting_number']);
         $degree = sanitizeInteger($_POST['degree']);
         $max_degree = sanitizeInteger($_POST['max_degree']);
+        $min_degree = sanitizeInteger($_POST['min_degree']);
         $school_Id = sanitizeInteger($_POST['school']);
         $subject_Id = sanitizeInteger($_POST['subject']);
 
@@ -30,7 +38,8 @@
             checkEmpty($school_year) &&
             checkEmpty($sitting_number) &&
             checkEmpty($degree) &&
-            checkEmpty($max_degree)
+            checkEmpty($max_degree) &&
+            checkEmpty($min_degree)
         ) {
 
             $sql = "INSERT INTO result (
@@ -41,6 +50,7 @@
                     `sitting_number`,
                     `degree`,
                     `max_degree`,
+                    `min_degree`,
                     `subjectId`,
                     `schoolId`,
                     `employeeId`) 
@@ -52,11 +62,11 @@
                             $sitting_number,
                             $degree,
                             $max_degree,
+                            $min_degree,
                             $subject_Id,
                             $school_Id,
                             $employee_id
                             )";
-            var_dump($sql);
             $result = db_insert($sql);
 
             if ($result['boolean'] === true) {
@@ -78,7 +88,6 @@
             if(in_array($ext, $allowedExtensions)) {
                 $file = "../../uploads/" . $_FILES['uploadFile']['name'];
                 $isUploaded = copy($_FILES['uploadFile']['tmp_name'], $file);
-
                 if($isUploaded) {
                     try {
                         // load uploaded file and get data in this file excel
@@ -188,7 +197,7 @@
                                          `subjectId`,
                                          `schoolId`,
                                          `employeeId`) VALUES (
-                                                     '$_student_name', 
+                                                     '$_student_name',
                                                      '$_semester',
                                                      '$_grade',
                                                      '$_school_year',
@@ -201,8 +210,11 @@
                                                      $employeeId)";
                                 $resultInsertResult = db_insert($insertResultSql);
                                 if ($resultInsertResult['boolean'] === true) {
+                                    unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
                                     $success_message = $resultInsertResult['message'];
+
                                 } else {
+                                    unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
                                     $error_message = $resultInsertResult['message'];
                                 }
                             }
@@ -251,7 +263,7 @@
             <div class="mb-2">
                 <input
                         class="form-control"
-                        type="date"
+                        type="text"
                         name="school_year"
                         placeholder="enter your school_year" >
             </div>
@@ -278,6 +290,14 @@
                         class="form-control"
                         name="max_degree"
                         placeholder="enter your subject max_degree" >
+            </div>
+
+            <div class="mb-2">
+                <input
+                        type="number"
+                        class="form-control"
+                        name="min_degree"
+                        placeholder="enter your subject min_degree" >
             </div>
 
             <select class="form-select mb-2" aria-label="add subject" name="school">

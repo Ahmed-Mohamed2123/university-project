@@ -2,6 +2,11 @@
     require '../../config.php';
     require BLP . 'shared/header.php';
     require BL . 'utils/validate.php';
+    if ($_SESSION['role'] === '0') {
+        header('location:' . BASEURLPAGES . 'index.php');
+    } elseif (!isset($_SESSION['role'])) {
+        header('location:' . BASEURLPAGES . 'auth/login.php');
+    }
 
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $schoolId = $_GET['id'];
@@ -10,7 +15,7 @@
 
         $school_id = $getSchoolById['id'];
         if (!$getSchoolById) {
-            header("location:".BASEURLPAGES . 'schools/viewAll.php');
+            header("location:".BASEURLPAGES . 'schools/viewParentOrder.php');
         }
 
 

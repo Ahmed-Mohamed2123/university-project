@@ -2,13 +2,18 @@
     require '../../config.php';
     require BLP . 'shared/header.php';
     require BL . 'utils/validate.php';
+    if ($_SESSION['role'] === '0') {
+        header('location:' . BASEURLPAGES . 'index.php');
+    } elseif (!isset($_SESSION['role'])) {
+        header('location:' . BASEURLPAGES . 'auth/login.php');
+    }
 
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $subjectId = $_GET['id'];
         $sql = "SELECT * FROM subject WHERE id = '$subjectId'";
         $getDataById = getRow($sql);
         if (!$getDataById) {
-            header("location:".BASEURLPAGES . 'subjects/viewAll.php');
+            header("location:".BASEURLPAGES . 'subjects/viewParentOrder.php');
         }
         $subject_id = $getDataById['id'];
 

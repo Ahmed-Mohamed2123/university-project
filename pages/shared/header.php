@@ -45,7 +45,7 @@
                         <?php } ?>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">View my profile</a></li>
+                            <li><a class="dropdown-item" href="<?php echo BASEURLPAGES . 'profile/edit.php'; ?>">View my profile</a></li>
                             <li><a class="dropdown-item" href="<?php echo BASEURLPAGES.'auth/logout.php';?>"><button class="btn btn-danger w-100">Logout</button></a></li>
                         </ul>
                     </div>

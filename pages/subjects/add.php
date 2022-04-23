@@ -2,6 +2,11 @@
     require '../../config.php';
     require BLP . 'shared/header.php';
     require BL . 'utils/validate.php';
+    if ($_SESSION['role'] === '0') {
+        header('location:' . BASEURLPAGES . 'index.php');
+    } elseif (!isset($_SESSION['role'])) {
+        header('location:' . BASEURLPAGES . 'auth/login.php');
+    }
 
     if (isset($_POST['submit'])) {
         $name = sanitizeString($_POST['name']);

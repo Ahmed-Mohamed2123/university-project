@@ -3,12 +3,18 @@
     require BLP . 'shared/header.php';
     require BL . 'utils/validate.php';
 
+    if ($_SESSION['role'] === '0') {
+        header('location:' . BASEURLPAGES . 'index.php');
+    } elseif (!isset($_SESSION['role'])) {
+        header('location:' . BASEURLPAGES . 'auth/login.php');
+    }
+
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $parentId = $_GET['id'];
         $sql = "SELECT * FROM parent WHERE id = '$parentId'";
         $getDataById = getRow($sql);
         if (!$getDataById) {
-            header("location:".BASEURLPAGES . 'parents/viewAll.php');
+            header("location:".BASEURLPAGES . 'parents/viewParentOrder.php');
         }
 
         $school_id = $getDataById['id'];

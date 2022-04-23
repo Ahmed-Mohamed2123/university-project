@@ -1,14 +1,15 @@
-<?php require '../../config.php';  ?>
+<?php require '../../config.php';
 
-<?php require BLP.'shared/header.php';  ?>
-<?php require BL.'utils/validate.php';  ?>
+require BLP.'shared/header.php';
+require BL.'utils/validate.php';
 
+if ($_SESSION['role'] === '0') {
+    header('location:' . BASEURLPAGES . 'index.php');
+} elseif (!isset($_SESSION['role'])) {
+    header('location:' . BASEURLPAGES . 'auth/login.php');
+}
 
-
-<?php
-
-if(isset($_POST['submit']))
-{
+if(isset($_POST['submit'])) {
     $parent_id = $_POST['parent_id'];
 
     $username = sanitizeString($_POST['username']);
@@ -19,7 +20,7 @@ if(isset($_POST['submit']))
 
     if ($result['boolean'] === true) {
         $success_message = $result['message'];
-        header( "refresh:2;url=".BASEURLPAGES."parents/viewAll.php");
+        header( "refresh:2;url=".BASEURLPAGES."parents/viewParentOrder.php");
     } else {
         $error_message = $result['message'];
     }
@@ -30,7 +31,7 @@ if(isset($_POST['submit']))
 }
 
 
-?>
 
-<?php require BLP.'shared/footer.php';  ?>
+
+require BLP.'shared/footer.php';
 

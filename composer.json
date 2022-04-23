@@ -1,5 +1,9 @@
 {
   "require": {
-    "phpoffice/phpexcel": "^1.8"
+    "phpoffice/phpexcel": "^1.8",
+    "ext-mysqli": "*",
+    "stripe/stripe-php": "^7.124",
+    "league/omnipay": "^3.2",
+    "omnipay/stripe": "^3.2"
   }
 }

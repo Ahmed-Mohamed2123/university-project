@@ -2,6 +2,10 @@
     require_once '../config.php';
     require_once BLP . 'shared/header.php';
 
+    if (!isset($_SESSION['role'])) {
+        header('location:' . BASEURLPAGES . 'auth/login.php');
+    }
+
 ?>
 
     <!--  start main    -->

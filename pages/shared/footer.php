@@ -15,7 +15,7 @@
             </div>
             <?php } ?>
 
-            <?php if ($_SESSION['role'] !== NULL) { ?>
+            <?php if ($_SESSION['role'] === '1') { ?>
             <div class="item">
                 <div class="item-content" id="dropdownMenuSchools" data-bs-toggle="dropdown" aria-expanded="false">
                     <p class="responsive main-item-text"><i class="fa-solid fa-school"></i> Schools</p>
@@ -24,36 +24,36 @@
 
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
                     <a href="<?php echo BASEURLPAGES . 'schools/add.php'?>">Add new school</a>
-                    <a href="<?php echo BASEURLPAGES . 'schools/viewAll.php'?>">View school</a>
+                    <a href="<?php echo BASEURLPAGES . 'schools/viewParentOrder.php'?>">View school</a>
                 </ul>
             </div>
             <?php } ?>
 
-            <?php if ($_SESSION['role'] !== NULL) { ?>
+            <?php if ($_SESSION['role'] === '1') { ?>
             <div class="item">
                 <div class="item-content" id="dropdownMenuStudents" data-bs-toggle="dropdown" aria-expanded="false">
                     <p class="responsive main-item-text"><i class="fa-solid fa-user-large"></i> parents</p>
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuStudents">
-                    <a href="<?php echo BASEURLPAGES . 'parents/viewAll.php'?>">View parents</a>
+                    <a href="<?php echo BASEURLPAGES . 'parents/viewParentOrder.php'?>">View parents</a>
                 </ul>
             </div>
             <?php } ?>
 
-            <?php if ($_SESSION['role'] !== NULL) { ?>
+            <?php if ($_SESSION['role'] === '1') { ?>
             <div class="item">
                 <div class="item-content" id="dropdownMenuEmployees" data-bs-toggle="dropdown" aria-expanded="false">
                     <p class="responsive main-item-text"><i class="fa-solid fa-user-group"></i> Employees</p>
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuEmployees">
-                    <a href="<?php echo BASEURLPAGES . 'Employees/viewAll.php'?>">View employees</a>
+                    <a href="<?php echo BASEURLPAGES . 'Employees/viewParentOrder.php'?>">View employees</a>
                 </ul>
             </div>
             <?php } ?>
 
-            <?php if ($_SESSION['role'] !== NULL) { ?>
+            <?php if ($_SESSION['role'] === '1') { ?>
             <div class="item">
                 <div class="item-content" id="dropdownMenuResults" data-bs-toggle="dropdown" aria-expanded="false">
                     <p class="responsive main-item-text"><i class="fa-solid fa-graduation-cap"></i> Results</p>
@@ -61,12 +61,12 @@
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuResults">
                 <a href="<?php echo BASEURLPAGES . 'results/add.php'?>">Add new result</a>
-                <a href="<?php echo BASEURLPAGES . 'results/viewAll.php'?>">View results</a>
+                <a href="<?php echo BASEURLPAGES . 'results/viewParentOrder.php'?>">View results</a>
                 </ul>
             </div>
             <?php } ?>
 
-            <?php if ($_SESSION['role'] !== NULL) { ?>
+            <?php if ($_SESSION['role'] === '1') { ?>
             <div class="item">
                 <div class="item-content" id="dropdownMenuSubjects" data-bs-toggle="dropdown" aria-expanded="false">
                     <p class="responsive main-item-text"><i class="fa-solid fa-book"></i> Subjects</p>
@@ -74,7 +74,7 @@
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuSubjects">
                     <a href="<?php echo BASEURLPAGES . 'subjects/add.php'?>">Add new subject</a>
-                    <a href="<?php echo BASEURLPAGES . 'subjects/viewAll.php'?>">View subjects</a>
+                    <a href="<?php echo BASEURLPAGES . 'subjects/viewParentOrder.php'?>">View subjects</a>
                 </ul>
             </div>
             <?php } ?>
@@ -86,7 +86,7 @@
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuPayments">
-                    <a href="<?php echo BASEURLPAGES . 'payments/viewAll.php'?>">View All payments</a>
+                    <a href="<?php echo BASEURLPAGES . 'payments/viewParentOrder.php'?>">View All payments</a>
                 </ul>
             </div>
             <?php } ?>
@@ -98,8 +98,8 @@
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuOrders">
-                    <a href="<?php echo BASEURLPAGES . 'orders/edit.php'?>">Add new order</a>
-                    <a href="<?php echo BASEURLPAGES . 'orders/viewAll.php'?>">View orders</a>
+                    <a href="<?php echo BASEURLPAGES . 'orders/add.php'?>">Add new order</a>
+                    <a href="<?php echo BASEURLPAGES . 'orders/viewParentOrder.php'?>">View orders</a>
                 </ul>
             </div>
             <?php } ?>
@@ -147,7 +147,9 @@
         </div>
     </div>
     <!--    end sidebar    -->
-
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="<?php echo ASSETS . 'js/stripe.js'?>"></script>
     <script src="<?php echo ASSETS . 'js/popper.min.js'?>"></script>
     <script src="<?php echo ASSETS . 'js/bootstrap.min.js'?>"></script>
     <script src="<?php echo ASSETS . 'js/all.js'?>"></script>
