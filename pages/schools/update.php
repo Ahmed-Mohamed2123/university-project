@@ -20,7 +20,7 @@ if(isset($_POST['submit']))
     $result = db_update($sql);
     if ($result['boolean'] === true) {
         $success_message = $result['message'];
-        header( "refresh:2;url=".BASEURLPAGES."schools/viewParentOrder.php");
+        header( "refresh:2;url=".BASEURLPAGES."schools/viewAll.php");
     } else {
         $error_message = $result['message'];
     }

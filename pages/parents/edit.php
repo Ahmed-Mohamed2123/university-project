@@ -14,7 +14,7 @@
         $sql = "SELECT * FROM parent WHERE id = '$parentId'";
         $getDataById = getRow($sql);
         if (!$getDataById) {
-            header("location:".BASEURLPAGES . 'parents/viewParentOrder.php');
+            header("location:".BASEURLPAGES . 'parents/viewAll.php');
         }
 
         $school_id = $getDataById['id'];

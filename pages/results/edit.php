@@ -24,7 +24,7 @@
         $subject_data[] = getResults($resultSql);
 
         if ($getStudentName['boolean'] === false && count($subject_data) <= 0) {
-            header('location:' . BASEURLPAGES . 'results/viewParentOrder.php');
+            header('location:' . BASEURLPAGES . 'results/viewAll.php');
         }
 
     } else {

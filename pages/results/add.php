@@ -10,10 +10,6 @@
         header('location:' . BASEURLPAGES . 'auth/login.php');
     }
 
-    require_once BL . '/vendor/autoload.php';
-    include BL . '/vendor/phpoffice/phpexcel/Classes/PHPExcel/IOFactory.php';
-
-
 
     $subjects = getRows('subject');
     $schools = getRows('school');
@@ -82,6 +78,8 @@
 
     if (isset($_POST['submit_file'])) {
         if (isset($_FILES['uploadFile']['name']) && $_FILES['uploadFile']['name'] != "") {
+            require_once BL . '/vendor/autoload.php';
+            include BL . '/vendor/phpoffice/phpexcel/Classes/PHPExcel/IOFactory.php';
             $allowedExtensions = array("xls","xlsx");
             // extension => الامتداد
             $ext = pathinfo($_FILES['uploadFile']['name'], PATHINFO_EXTENSION);
@@ -95,9 +93,8 @@
                     } catch (Exception $e) {
                         die('Error loading file "' . pathinfo($file, PATHINFO_BASENAME). '": ' . $e->getMessage());
                     }
-
                     // page one in Excel file
-                    $sheet = $objPHPExcel->getSheet(0);
+                    $sheet = $objPHPExcel->getSheet();
                     $total_rows = $sheet->getHighestRow();
                     // last of column in this file
                     $highestColumn = $sheet->getHighestColumn();
@@ -127,7 +124,7 @@
                     $val = array_filter($val);
 
                     // range for student_name and sitting_number
-                    $_range2 = $sheet->rangeToArray('B13' . ':C19',
+                    $_range2 = $sheet->rangeToArray('B13' . ':C' . $total_rows,
                         NULL,
                         TRUE,
                         FALSE);
@@ -147,6 +144,7 @@
                             db_insert($InsertSubjectName);
                         }
                     }
+
 
                     // check is exist school in db and if it does not exist will be added to the db
                     $findSchoolByName = "SELECT `school_name` FROM `school` WHERE `school_name` = '$_school_name'";
@@ -182,9 +180,10 @@
                                 $employeeId = $_SESSION['id'];
 
                                 $_sql = "select $subjects_names_modify =>>>> $val_modify => $_student_name => $maxDegrees_modify => $minDegrees_modify => " . '<br>';
-
-                                $insertResultSql =
-                                    "INSERT INTO `result`
+                                $studentExist = getRow("select * from result WHERE `student_name` ='$_student_name' AND `subjectId`= $subject_id");
+                                if (!$studentExist) {
+                                    $insertResultSql =
+                                        "INSERT INTO `result`
                                         (
                                          `student_name`,
                                          `semester`,
@@ -208,25 +207,28 @@
                                                      $subject_id,
                                                      $school_id,
                                                      $employeeId)";
-                                $resultInsertResult = db_insert($insertResultSql);
-                                if ($resultInsertResult['boolean'] === true) {
-                                    unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
-                                    $success_message = $resultInsertResult['message'];
+                                    $resultInsertResult = db_insert($insertResultSql);
 
+                                    if ($resultInsertResult['boolean'] === true) {
+                                        unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
+                                        $success_message = $resultInsertResult['message'];
+
+                                    } else {
+                                        unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
+                                        $error_message = $resultInsertResult['message'];
+                                    }
                                 } else {
                                     unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
-                                    $error_message = $resultInsertResult['message'];
                                 }
+
                             }
                         }
-
                     }
-
                 }
             }
         }
     }
-
+    require BLP . 'shared/loading.php';
     require BL . 'utils/error.php';
 ?>
 
@@ -335,6 +337,11 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <?php if (isset($isLoading) && $isLoading === true) { ?>
+                <div class="spinner-border" style="position: absolute;bottom: 20px;left: 8px;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            <?php } ?>
             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">add sheet excel</h5>

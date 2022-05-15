@@ -32,7 +32,7 @@
                 $result = db_insert($sql_insert);
                 if ($result['boolean'] === true) {
                     $success_message = $result['message'];
-                    header("refresh:2;url=" . BASEURLPAGES . '/results/viewParentOrder.php');
+                    header("refresh:2;url=" . BASEURLPAGES . '/results/viewAll.php');
                 } else {
                     $error_message = $result['message'];
                 }

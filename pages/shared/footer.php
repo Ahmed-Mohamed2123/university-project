@@ -24,7 +24,7 @@
 
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
                     <a href="<?php echo BASEURLPAGES . 'schools/add.php'?>">Add new school</a>
-                    <a href="<?php echo BASEURLPAGES . 'schools/viewParentOrder.php'?>">View school</a>
+                    <a href="<?php echo BASEURLPAGES . 'schools/viewAll.php'?>">View school</a>
                 </ul>
             </div>
             <?php } ?>
@@ -36,7 +36,7 @@
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuStudents">
-                    <a href="<?php echo BASEURLPAGES . 'parents/viewParentOrder.php'?>">View parents</a>
+                    <a href="<?php echo BASEURLPAGES . 'parents/viewAll.php'?>">View parents</a>
                 </ul>
             </div>
             <?php } ?>
@@ -48,7 +48,7 @@
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuEmployees">
-                    <a href="<?php echo BASEURLPAGES . 'Employees/viewParentOrder.php'?>">View employees</a>
+                    <a href="<?php echo BASEURLPAGES . 'Employees/viewAll.php'?>">View employees</a>
                 </ul>
             </div>
             <?php } ?>
@@ -61,7 +61,7 @@
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuResults">
                 <a href="<?php echo BASEURLPAGES . 'results/add.php'?>">Add new result</a>
-                <a href="<?php echo BASEURLPAGES . 'results/viewParentOrder.php'?>">View results</a>
+                <a href="<?php echo BASEURLPAGES . 'results/viewAll.php'?>">View results</a>
                 </ul>
             </div>
             <?php } ?>
@@ -74,19 +74,19 @@
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuSubjects">
                     <a href="<?php echo BASEURLPAGES . 'subjects/add.php'?>">Add new subject</a>
-                    <a href="<?php echo BASEURLPAGES . 'subjects/viewParentOrder.php'?>">View subjects</a>
+                    <a href="<?php echo BASEURLPAGES . 'subjects/viewAll.php'?>">View subjects</a>
                 </ul>
             </div>
             <?php } ?>
 
-            <?php if ($_SESSION['role'] !== NULL) { ?>
+            <?php if ($_SESSION['role'] === '0') { ?>
             <div class="item">
                 <div class="item-content" id="dropdownMenuPayments" data-bs-toggle="dropdown" aria-expanded="false">
                     <p class="responsive main-item-text"><i class="fa-solid fa-money-bill-1-wave"></i> Payments</p>
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuPayments">
-                    <a href="<?php echo BASEURLPAGES . 'payments/viewParentOrder.php'?>">View All payments</a>
+                    <a href="<?php echo BASEURLPAGES . 'payments/viewAll.php'?>">View All payments</a>
                 </ul>
             </div>
             <?php } ?>
@@ -98,8 +98,10 @@
                     <img class="arrow" src="<?php echo ASSETS . 'images/arrow.png'?>" alt="">
                 </div>
                 <ul class="menu dropdown-menu w-100" aria-labelledby="dropdownMenuOrders">
-                    <a href="<?php echo BASEURLPAGES . 'orders/add.php'?>">Add new order</a>
-                    <a href="<?php echo BASEURLPAGES . 'orders/viewParentOrder.php'?>">View orders</a>
+                    <?php if ($_SESSION['role'] === '0') { ?>
+                        <a href="<?php echo BASEURLPAGES . 'orders/add.php'?>">Add new order</a>
+                    <?php } ?>
+                    <a href="<?php echo BASEURLPAGES . 'orders/viewAll.php'?>">View orders</a>
                 </ul>
             </div>
             <?php } ?>
@@ -107,7 +109,7 @@
             <?php if ($_SESSION['role'] !== NULL) { ?>
             <div class="item d-lg-none">
                 <div class="item-content">
-                    <p class="responsive main-item-text"><i class="fa-solid fa-circle-info"></i> View my profile</p>
+                    <a class="responsive main-item-text" href="<?php echo BASEURLPAGES . 'profile/edit.php'; ?>"><i class="fa-solid fa-circle-info"></i> View my profile</a>
                 </div>
             </div>
             <?php } ?>

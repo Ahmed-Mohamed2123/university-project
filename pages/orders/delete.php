@@ -13,7 +13,7 @@
         $result = deleteRow("DELETE FROM `_order` WHERE `id`= $orderId");
         if ($result['boolean'] === true) {
             $success_message = $result['message'];
-            header( "refresh:2;url=".BASEURLPAGES."orders/viewParentOrder.php");
+            header( "refresh:2;url=".BASEURLPAGES."orders/viewAll.php");
         } else {
             $error_message = $result['message'];
         }

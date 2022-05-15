@@ -1,4 +1,4 @@
-if (document.location.pathname == '/checkout') {
+if (document.location.pathname.includes('/checkout')) {
     // Create a Stripe client.
     const stripe = Stripe('pk_test_51K2rCpLJlQnKOvm2WOnJyfdP7ZZfeJKtAQn8vzE0KDMZHGBb3uTdZp6DaK6YOiBbWQ5s37Rt89PSUbhsZ1xQq9Ao00rraqgHqj');
 

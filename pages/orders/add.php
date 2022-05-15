@@ -59,7 +59,7 @@
 
                     if ($result['boolean'] === true) {
                         $success_message = $result['message'];
-                        header("Refresh:3;url=" . BASEURLPAGES . 'orders/viewParentOrder.php');
+                        header("Refresh:3;url=" . BASEURLPAGES . 'orders/viewAll.php');
                     } else {
                         $error_message = $result['message'];
                     }

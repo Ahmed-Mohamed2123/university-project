@@ -4,6 +4,7 @@
     "ext-mysqli": "*",
     "stripe/stripe-php": "^7.124",
     "league/omnipay": "^3.2",
-    "omnipay/stripe": "^3.2"
+    "omnipay/stripe": "^3.2",
+    "ext-json": "*"
   }
 }

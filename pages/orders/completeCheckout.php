@@ -42,12 +42,13 @@ if(
                                         (`amount`, `paymentMethod`, `invoiceId`, `parentId`) 
                                         VALUES ($price, '$paymentBrand', $invoiceId, $profileId)");
 
-                                $result_update_order = db_update("UPDATE `_order` SET `invoiceId`=$invoiceId WHERE `id`= $orderId ");
+                                $result_update_order = db_update("UPDATE `_order` SET `invoiceId`=$invoiceId, `order_status` = 3 WHERE `id`= $orderId ");
 
 
                                 if ($result_payment['boolean'] === true &&
                                     $result_update_order['boolean'] === true) {
                                     $success_message = 'The process was completed successfully. After 3 minutes, you will be directed to the orders page.';
+                                    header("refresh:3;url=" . BASEURLPAGES . '/orders/orderDetails.php?id=' . $orderId);
                                 } else {
                                     $error_message = 'An error has occurred';
                                 }
@@ -73,12 +74,13 @@ if(
                                         (`amount`, `paymentMethod`, `invoiceId`, `parentId`) 
                                         VALUES ($price, 'cash', $invoiceId, $profileId)");
 
-            $result_update_order = db_update("UPDATE `_order` SET `invoiceId`=$invoiceId WHERE `id`= $orderId ");
+            $result_update_order = db_update("UPDATE `_order` SET `invoiceId`=$invoiceId, `order_status` = 3 WHERE `id`= $orderId ");
 
 
             if ($result_payment['boolean'] === true &&
                 $result_update_order['boolean'] === true) {
                 $success_message = 'The process was completed successfully. After 3 minutes, you will be directed to the orders page.';
+                header("refresh:3;url=" . BASEURLPAGES . '/orders/orderDetails.php?id=' . $orderId);
             } else {
                 $error_message = 'An error has occurred';
             }

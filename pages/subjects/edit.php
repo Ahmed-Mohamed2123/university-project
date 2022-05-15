@@ -13,7 +13,7 @@
         $sql = "SELECT * FROM subject WHERE id = '$subjectId'";
         $getDataById = getRow($sql);
         if (!$getDataById) {
-            header("location:".BASEURLPAGES . 'subjects/viewParentOrder.php');
+            header("location:".BASEURLPAGES . 'subjects/viewAll.php');
         }
         $subject_id = $getDataById['id'];
 

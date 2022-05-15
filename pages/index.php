@@ -25,7 +25,7 @@
                </div>
 
                 <div class="background-image">
-                    <img src="<?php echo ASSETS . 'images/background-image-.png'?>" alt="">
+                    <img src="<?php echo ASSETS . 'images/Electronic-management.jpg'?>" alt="">
                 </div>
             </div>
         </div>

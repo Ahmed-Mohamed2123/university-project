@@ -19,7 +19,7 @@
         if ($result['boolean'] === true) {
             $success_message = $result['message'];
 
-            header( "refresh:3;url=".BASEURLPAGES."parents/viewParentOrder.php");
+            header( "refresh:3;url=".BASEURLPAGES."parents/viewAll.php");
         } else {
             $error_message = $result['message'];
         }

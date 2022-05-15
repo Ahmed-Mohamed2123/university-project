@@ -21,7 +21,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id']))
     if ($result['boolean'] === true) {
         $success_message = $result['message'];
 
-        header( "refresh:3;url=".BASEURLPAGES."schools/viewParentOrder.php");
+        header( "refresh:3;url=".BASEURLPAGES."schools/viewAll.php");
     } else {
         $error_message = $result['message'];
     }

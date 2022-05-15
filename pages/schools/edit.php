@@ -15,7 +15,7 @@
 
         $school_id = $getSchoolById['id'];
         if (!$getSchoolById) {
-            header("location:".BASEURLPAGES . 'schools/viewParentOrder.php');
+            header("location:".BASEURLPAGES . 'schools/viewAll.php');
         }
 
 

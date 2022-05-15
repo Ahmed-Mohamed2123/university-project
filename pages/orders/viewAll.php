@@ -10,12 +10,12 @@
 
     if ($role === 0) {
         $conditionCount = "
-                    LEFT JOIN `result` ON result.id = _order.resultId
                     WHERE `parentId` LIKE '%$profileId%'
                 ";
 
         $conditionOrRestSql = "
                     LEFT JOIN `result` ON result.id = _order.resultId
+                    LEFT JOIN `parent` ON parent.id = _order.parentId
                     WHERE `parentId` LIKE '%$profileId%'
                 ";
     } else {
@@ -24,6 +24,7 @@
                 ";
 
         $conditionOrRestSql = "
+                    LEFT JOIN `parent` ON parent.id = _order.parentId
                     LEFT JOIN `result` ON result.id = _order.resultId
                 ";
     }
@@ -37,6 +38,8 @@
              _order.invoiceId,
              _order.resultId,
              _order.order_status,
+             _order.parentId,
+             parent.username,
              result.student_name', '_order', $limit, $conditionCount, $conditionOrRestSql);
 ?>
 
@@ -47,11 +50,15 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <?php if ($role === 0) { ?>
                     <th scope="col">order status</th>
+                    <?php } ?>
                     <th scope="col">order date</th>
                     <th scope="col">price</th>
                     <th scope="col">name</th>
-                    <th scope="col">info</th>
+                    <?php if ($role === 0) { ?>
+                        <th scope="col">info</th>
+                    <?php } ?>
                     <th scope="col">options</th>
                 </tr>
             </thead>
@@ -59,35 +66,44 @@
                 <?php foreach ($data_pagination['data'] as $row) {  ?>
                     <tr>
                         <td><?php echo $x; ?></td>
-                        <td>
-                            <?php
-                                if (intval($row['order_status']) === 0) {
-                                    echo 'please waiting <img src=' . ASSETS . 'images/clock.png' . ' />';
-                                } elseif (intval($row['order_status']) === 1) {
-                                    echo 'accepted <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
-                                } elseif (intval($row['order_status']) === 2) {
-                                    echo 'rejected <img style="width:26px;height:26px" src=' . ASSETS . 'images/rejected.png' . ' />';
-                                } elseif (intval($row['order_status']) === 3) {
-                                    echo 'accepted <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
-                                }
-                            ?>
-                        </td>
+                        <?php if ($role === 0) { ?>
+                            <td>
+                                <?php
+                                    if (intval($row['order_status']) === 0) {
+                                        echo 'please waiting <img src=' . ASSETS . 'images/clock.png' . ' />';
+                                    } elseif (intval($row['order_status']) === 1) {
+                                        echo 'accepted <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
+                                    } elseif (intval($row['order_status']) === 2) {
+                                        echo 'rejected <img style="width:26px;height:26px" src=' . ASSETS . 'images/rejected.png' . ' />';
+                                    } elseif (intval($row['order_status']) === 3) {
+                                        echo 'accepted <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
+                                    }
+                                ?>
+                            </td>
+                        <?php } ?>
                         <td><?php echo $row['order_date']; ?></td>
                         <td><?php echo $row['price']; ?></td>
-                        <td><?php echo $row['student_name']; ?></td>
-                        <td>
-                            <?php
-                                if (intval($row['order_status']) === 0) {
-                                    echo 'The order may take a few hours, please wait.';
-                                } elseif (intval($row['order_status']) === 1) {
-                                    echo 'Please complete the rest of the processes to get the required.';
-                                } elseif (intval($row['order_status']) === 2) {
-                                    echo 'See the administration to find out the reason for the refusal.';
-                                } elseif (intval($row['order_status']) === 3) {
-                                    echo 'All operations have been completed. You can view what you requested.';
-                                }
-                            ?>
+                        <?php if ($role === 0) { ?>
+                            <td><?php echo $row['student_name']; ?></td>
+                        <?php } elseif ($role === 1) { ?>
+                            <td><?php echo $row['username']; ?></td>
+                        <?php } ?>
+
+                        <?php if ($role === 0) { ?>
+                            <td>
+                                <?php
+                                    if (intval($row['order_status']) === 0) {
+                                        echo 'The order may take a few hours, please wait.';
+                                    } elseif (intval($row['order_status']) === 1) {
+                                        echo 'Please complete the rest of the processes to get the required.';
+                                    } elseif (intval($row['order_status']) === 2) {
+                                        echo 'See the administration to find out the reason for the refusal.';
+                                    } elseif (intval($row['order_status']) === 3) {
+                                        echo 'All operations have been completed. You can view what you requested.';
+                                    }
+                                ?>
                         </td>
+                        <?php } ?>
                         <td>
                             <!--  for parent  -->
                             <?php if ($role === 0 && intval($row['order_status']) === 0) { ?>
@@ -101,8 +117,20 @@
                             <?php } ?>
                             <!--  for employee  -->
                             <?php if ($role === 1) { ?>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">accept_order</button>
-                            <?php } ?>
+                                <?php if (
+                                        intval($row['order_status']) === 1 ||
+                                        intval($row['order_status']) === 0 ||
+                                        intval($row['order_status']) === 2) { ?>
+                                    <a
+                                            class="btn btn-primary"
+                                            <?php if (intval($row['order_status']) === 1) {echo 'disabled="disabled"';} ?>
+                                            href="<?php echo BASEURLPAGES . 'orders/changeStatusOrder.php?request=accept&id=' . $row['id'];?>">accept</a>
+                                    <a
+                                            class="btn btn-danger"
+                                            <?php if (intval($row['order_status']) === 2) {echo 'disabled="disabled"';} ?>
+                                            href="<?php echo BASEURLPAGES . 'orders/changeStatusOrder.php?request=reject&id=' . $row['id'];?>">reject</a>
+                                <?php } ?>
+                            <?php }?>
                             </td>
 
                         <!-- Modal -->

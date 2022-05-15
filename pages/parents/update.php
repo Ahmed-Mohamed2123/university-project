@@ -20,7 +20,7 @@ if(isset($_POST['submit'])) {
 
     if ($result['boolean'] === true) {
         $success_message = $result['message'];
-        header( "refresh:2;url=".BASEURLPAGES."parents/viewParentOrder.php");
+        header( "refresh:2;url=".BASEURLPAGES."parents/viewAll.php");
     } else {
         $error_message = $result['message'];
     }
