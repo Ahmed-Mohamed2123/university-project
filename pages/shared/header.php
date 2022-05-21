@@ -20,7 +20,7 @@
             <div class="header-content">
                 <div class="header-content-left">
                     <p class="mb-0 project-name">
-                        <a href="<?php echo BASEURLPAGES . 'index.php'?>" class="text-decoration-none">project_name</a>
+                        <a href="<?php echo BASEURLPAGES . 'index.php'?>" class="text-decoration-none">E.D.T</a>
                     </p>
                 </div>
 
@@ -45,8 +45,8 @@
                         <?php } ?>
 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="<?php echo BASEURLPAGES . 'profile/edit.php'; ?>">View my profile</a></li>
-                            <li><a class="dropdown-item" href="<?php echo BASEURLPAGES.'auth/logout.php';?>"><button class="btn btn-danger w-100">Logout</button></a></li>
+                            <li><a class="dropdown-item" href="<?php echo BASEURLPAGES . 'profile/edit.php'; ?>">الملف الشخصى</a></li>
+                            <li><a class="dropdown-item" href="<?php echo BASEURLPAGES.'auth/logout.php';?>"><button class="btn btn-danger w-100">تسجيل الخروج</button></a></li>
                         </ul>
                     </div>
                 </div>

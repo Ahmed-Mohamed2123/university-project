@@ -23,9 +23,9 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">amount</th>
-                    <th scope="col">payment method</th>
-                    <th scope="col">date</th>
+                    <th scope="col">المدفوع</th>
+                    <th scope="col">نوع وسيله الدفع</th>
+                    <th scope="col">التاريخ</th>
                     <th scope="col">options</th>
                 </tr>
             </thead>
@@ -40,7 +40,7 @@
                             <button
                                     class="btn btn-primary"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#paymentModal">show invoice</button>
+                                    data-bs-target="#paymentModal">اظهار الفاتوره</button>
                         </td>
 
                         <!-- Modal -->
@@ -48,39 +48,39 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Invoice</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">الفاتوره</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" id="modalBody">
                                         <div class="content-modal">
                                             <div class="invoice-info">
                                                 <div class="item d-flex justify-content-between">
-                                                    <p class="lead">order type:_</p>
+                                                    <p class="lead order-1">_:نوع الطلب</p>
                                                     <p>result</p>
                                                 </div>
                                                 <div class="item d-flex justify-content-between">
-                                                    <p class="lead">invoice.invoice_date:_</p>
+                                                    <p class="lead order-1">_:تاريخ الفاتوره</p>
                                                     <p><?php echo date( "d/m/Y", strtotime($row['date'])); ?></p>
                                                 </div>
                                                 <div class="item d-flex justify-content-between">
-                                                    <p class="lead">name parent:_</p>
+                                                    <p class="lead order-1">_:اسم ولي الأمر</p>
                                                     <p><?php echo $row['username'];?></p>
                                                 </div>
                                                 <div class="item d-flex justify-content-between">
-                                                    <p class="lead">address</p>
+                                                    <p class="lead order-1">_:عنوان ولي الامر</p>
                                                     <p><?php echo $row['address'];?></p>
                                                 </div>
                                             </div>
                                             <hr>
                                             <div class="invoice_total d-flex justify-content-between">
-                                                <p class="lead">invoice_total</p>
+                                                <p class="lead order-1">المبلغ المدفوع</p>
                                                 <p class="fw-bold"><?php echo $row['amount']?></p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="printInvoice(this)">print</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلق النافذه</button>
+                                        <button type="button" class="btn btn-primary" onclick="printInvoice(this)">اطبع الفاتوره</button>
                                     </div>
                                 </div>
                             </div>

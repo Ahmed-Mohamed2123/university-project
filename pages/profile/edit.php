@@ -18,7 +18,7 @@
 
 <div class="main profile" id="main">
     <div class="pagesForm p-4">
-        <h3 class="mb-0 text-white">Edit profile</h3>
+        <h3 class="mb-0 text-white text-end">تعديل الملف الشخصى</h3>
         <hr class="bg-white">
         <form method="post" action="<?php echo BASEURLPAGES . 'profile/update.php'; ?>">
             <input type="hidden" name="profile_id" value="<?php echo $id; ?>" >
@@ -51,9 +51,9 @@
             </div>
 
             <button
-                class="btn btn-danger"
+                class="btn btn-danger w-100"
                 type="submit"
-                name="submit">save</button>
+                name="submit">احفظ</button>
         </form>
     </div>
 </div>

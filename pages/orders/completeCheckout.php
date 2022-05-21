@@ -47,10 +47,10 @@ if(
 
                                 if ($result_payment['boolean'] === true &&
                                     $result_update_order['boolean'] === true) {
-                                    $success_message = 'The process was completed successfully. After 3 minutes, you will be directed to the orders page.';
+                                    $success_message = 'اكتملت العملية بنجاح. بعد 3 دقائق ، سيتم توجيهك إلى صفحة الطلبات.';
                                     header("refresh:3;url=" . BASEURLPAGES . '/orders/orderDetails.php?id=' . $orderId);
                                 } else {
-                                    $error_message = 'An error has occurred';
+                                    $error_message = 'حدث خطأ.';
                                 }
                             }
                         }
@@ -79,10 +79,10 @@ if(
 
             if ($result_payment['boolean'] === true &&
                 $result_update_order['boolean'] === true) {
-                $success_message = 'The process was completed successfully. After 3 minutes, you will be directed to the orders page.';
+                $success_message = 'اكتملت العملية بنجاح. بعد 3 دقائق ، سيتم توجيهك إلى صفحة الطلبات.';
                 header("refresh:3;url=" . BASEURLPAGES . '/orders/orderDetails.php?id=' . $orderId);
             } else {
-                $error_message = 'An error has occurred';
+                $error_message = 'حدث خطأ.';
             }
         }
     }

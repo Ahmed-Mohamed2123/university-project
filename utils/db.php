@@ -20,13 +20,13 @@ function db_insert($sql) {
         return [
             'id' => intval($conn->insert_id),
             'boolean' => true,
-            'message' => 'data has bean added successfully'
+            'message' => 'تمت اضافه البيانات بنجاح'
         ];
     }
 
     return [
         'boolean' => false,
-        'message' => 'An error has occurred'
+        'message' => 'حدث خطأ , حاول مره اخرى'
     ];
 }
 
@@ -39,12 +39,12 @@ function db_update($sql)
     {
         return [
             'boolean' => true,
-            'message' => 'data has bean updated successfully'
+            'message' => 'تم تحديث البيانات بنجاح'
         ];
     }
     return [
         'boolean' => false,
-        'message' => 'An error has occurred'
+        'message' => 'حدث خطأ , حاول مره اخرى'
     ];
 }
 
@@ -57,12 +57,12 @@ function deleteRow($sql)
     {
         return [
             'boolean' => true,
-            'message' => 'data has bean deleted successfully'
+            'message' => 'تم حذف البيانات بنجاح'
         ];
     }
     return [
         'boolean' => false,
-        'message' => 'An error has occurred',
+        'message' => 'حدث خطأ , حاول مره اخرى',
     ];
 }
 
@@ -156,7 +156,7 @@ function paginationOrder($table, $limit, $conditionCount, $conditionOrRestSql) {
     $startFrom = ($currentPage * $limit) - $limit;
     // fetch data with specific limit
     // LIMIT offset, count
-    $tableSQL = "SELECT DISTINCT(`student_name`) FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
+    $tableSQL = "SELECT DISTINCT(`student_name`), `schoolId` FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
     return paginationOperations("DISTINCT `student_name`", $table, $limit, $conditionCount, $conditionOrRestSql, $tableSQL, $currentPage);
 }
 

@@ -18,7 +18,7 @@
             if (validEmail($email)) {
                 $emailExist = getRow('users', 'email', $email);
                 if ($emailExist) {
-                    $error_message = 'This email is already registered, please use another email.';
+                    $error_message = 'هذا الايميل مسجل به سابقا , من فضلك اكتب ايميل اخر.';
                 } else {
                     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -61,11 +61,11 @@
 
                 }
             } else {
-                $error_message = "Type Correct Email";
+                $error_message = "من فضلك اكتب ايميل صحيح";
             }
 
         } else {
-            $error_message = "Please Fill email field and password field";
+            $error_message = "مطلوب ملأ حقل الايميل والرقم السري";
         }
     }
 
@@ -109,20 +109,20 @@ require BL . 'utils/error.php';
     <div class="container-fluid">
         <div class="register p-4">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                <h3>Register</h3>
+                <h3 class="text-end">تسجيل</h3>
                 <hr>
 
                 <div class="d-flex justify-content-between mb-2">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="radio" value="parent" id="flexRadioDefault1" checked>
                         <label class="form-check-label" for="flexRadioDefault1">
-                            parent
+                            ولي الأمر
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="radio" value="employee" id="flexRadioDefault2">
                         <label class="form-check-label" for="flexRadioDefault2">
-                            employee
+                            موظف
                         </label>
                     </div>
                 </div>
@@ -133,7 +133,7 @@ require BL . 'utils/error.php';
                 <input class="form-control mb-2" type="text" name="address" placeholder="Enter your address">
                 <input class="form-control mb-2" type="number" name="national_id" placeholder="Enter your national_id">
 
-                <button type="submit" name="submit" class="btn btn-danger">Register</button>
+                <button type="submit" name="submit" class="btn btn-danger w-100">تسجيل</button>
             </form>
         </div>
     </div>

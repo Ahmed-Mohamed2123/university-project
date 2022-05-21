@@ -26,7 +26,7 @@
     <!--  start main    -->
     <div class="main school" id="main">
         <div class="pagesForm p-3">
-            <h3 class="mb-0 text-white">Edit School</h3>
+            <h3 class="mb-0 text-white text-end">تعديل المدرسه</h3>
             <hr class="bg-white">
             <form method="post" action="<?php echo BASEURLPAGES . 'schools/update.php'; ?>">
                 <input type="hidden" name="school_id" value="<?php echo $school_id; ?>" class="form-control" >
@@ -48,9 +48,9 @@
                 </div>
 
                 <button
-                    class="btn btn-danger"
+                    class="btn btn-danger w-100"
                     type="submit"
-                    name="submit">save</button>
+                    name="submit">حفظ</button>
             </form>
         </div>
     </div>

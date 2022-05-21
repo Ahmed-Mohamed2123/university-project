@@ -125,83 +125,85 @@
                     <button
                             class="btn btn-success"
                             name="submit"
-                            type="submit">search</button>
+                            type="submit">ابحث</button>
                 </div>
             </form>
             <br>
         </div>
 
         <?php if ($data_pagination !== NULL) { ?>
-            <table class="table table-bordered text-center" style="vertical-align: middle;">
-            <thead>
-            <tr style="vertical-align: middle;">
-                <th scope="col">#</th>
-                <th scope="col">student_name</th>
-                <th scope="col">school_year</th>
-                <th scope="col">sitting_number</th>
-                <th scope="col"></th>
-                <?php foreach ($subject_data[0] as $row) {  ?>
-                    <th scope="col">
-                        <?php echo $row['subject_name'];?>
-                    </th>
-                <?php } ?>
-                <th scope="col">total_degrees</th>
-                <th scope="col">percentage</th>
-                <th scope="col">options</th>
-            </tr>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">max_degree</th>
-                <?php foreach ($subject_data[0] as $row) {  ?>
-                    <th scope="col">
-                        <?php echo $row['max_degree']; ?>
-                    </th>
-                <?php } ?>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">min_degree</th>
-                <?php foreach ($subject_data[0] as $row) {  ?>
-                    <th scope="col">
-                        <?php $total_max_degree[] = $row['min_degree']; echo $row['min_degree'];?>
-                    </th>
-                <?php } ?>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($data_pagination['data'] as $row) {  ?>
-                    <tr>
-                        <th scope="row"><?php echo $x; ?></th>
-                        <td><?php echo $row['student_name']; ?></td>
-                        <td><?php echo $row['school_year']; ?></td>
-                        <td><?php echo $row['sitting_number']; ?></td>
-                        <td></td>
-                        <?php for ($t = 0; $t < count($subject_data[$x]); $t++) {  ?>
-                            <td><?php   $total[$t] = $subject_data[$x][$t]['degree']; echo $subject_data[$x][$t]['degree'];?></td>
+            <div style="overflow-y: auto">
+                <table class="table table-bordered text-center table-responsive" style="vertical-align: middle;">
+                    <thead>
+                    <tr style="vertical-align: middle;">
+                        <th scope="col">#</th>
+                        <th scope="col">اسم الطالب</th>
+                        <th scope="col">السنه الدراسيه</th>
+                        <th scope="col">رقم الجلوس</th>
+                        <th scope="col"></th>
+                        <?php foreach ($subject_data[0] as $row) {  ?>
+                            <th scope="col">
+                                <?php echo $row['subject_name'];?>
+                            </th>
                         <?php } ?>
-                        <td><?php echo array_sum($total); ?></td>
-                        <td><?php echo floor((array_sum($total_max_degree) / array_sum($total)) * 100) . '%'; ?></td>
-
-                        <td>
-                            <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'results/edit.php?sitting_number=' . $row['sitting_number'];?>">edit</a>
-                            <a class="btn btn-danger" href="<?php echo BASEURLPAGES . 'results/delete.php?sitting_number=' . $row['sitting_number'];?>">delete</a>
-                        </td>
+                        <th scope="col">مجموع الدرجات</th>
+                        <th scope="col">النسبه المئويه</th>
+                        <th scope="col">options</th>
                     </tr>
-                <?php $x++; } ?>
-            </tbody>
-        </table>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">الدرجه العظمى</th>
+                        <?php foreach ($subject_data[0] as $row) {  ?>
+                            <th scope="col">
+                                <?php echo $row['max_degree']; ?>
+                            </th>
+                        <?php } ?>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">الدرجه الصغرى</th>
+                        <?php foreach ($subject_data[0] as $row) {  ?>
+                            <th scope="col">
+                                <?php $total_max_degree[] = $row['min_degree']; echo $row['min_degree'];?>
+                            </th>
+                        <?php } ?>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($data_pagination['data'] as $row) {  ?>
+                        <tr>
+                            <th scope="row"><?php echo $x; ?></th>
+                            <td><?php echo $row['student_name']; ?></td>
+                            <td><?php echo $row['school_year']; ?></td>
+                            <td><?php echo $row['sitting_number']; ?></td>
+                            <td></td>
+                            <?php for ($t = 0; $t < count($subject_data[$x]); $t++) {  ?>
+                                <td><?php   $total[$t] = $subject_data[$x][$t]['degree']; echo $subject_data[$x][$t]['degree'];?></td>
+                            <?php } ?>
+                            <td><?php echo array_sum($total); ?></td>
+                            <td><?php echo floor((array_sum($total_max_degree) / array_sum($total)) * 100) . '%'; ?></td>
+
+                            <td>
+                                <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'results/edit.php?sitting_number=' . $row['sitting_number'];?>">تعديل</a>
+                                <a class="btn btn-danger" href="<?php echo BASEURLPAGES . 'results/delete.php?sitting_number=' . $row['sitting_number'];?>">حذف</a>
+                            </td>
+                        </tr>
+                        <?php $x++; } ?>
+                    </tbody>
+                </table>
+            </div>
 
             <nav class="d-flex justify-content-center" aria-label="Page navigation example">
             <ul class="pagination">

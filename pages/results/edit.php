@@ -73,7 +73,9 @@
                     </tbody>
                 </table>
 
-                <button type="submit" name="submit" class="btn btn-danger">save</button>
+                <div class="w-100 d-flex justify-content-end">
+                    <button type="submit" name="submit" class="btn btn-danger">حفظ</button>
+                </div>
             </form>
         </div>
     </div>

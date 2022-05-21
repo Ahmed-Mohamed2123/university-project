@@ -22,7 +22,7 @@
             }
 
         } else {
-            $error_message = "Please Fill name Field";
+            $error_message = "من فضلك املأ جميع الحقول";
         }
 
         require BL . 'utils/error.php';
@@ -32,7 +32,7 @@
     <!--  start main    -->
     <div class="main subject" id="main">
         <div class="pagesForm p-3">
-            <h3 class="mb-0 text-white">Add new Subject</h3>
+            <h3 class="mb-0 text-white text-end">اضافه ماده</h3>
             <hr class="bg-white">
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <div class="mb-2">
@@ -44,9 +44,9 @@
                 </div>
 
                 <button
-                        class="btn btn-danger"
+                        class="btn btn-danger w-100"
                         type="submit"
-                        name="submit">save</button>
+                        name="submit">حفظ</button>
             </form>
         </div>
     </div>

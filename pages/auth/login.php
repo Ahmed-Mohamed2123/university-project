@@ -48,20 +48,20 @@ if (isset($_POST['submit']))
                     header("location:".BASEURLPAGES);
                 }
                 else {
-                    $error_message = "password is incorrect";
+                    $error_message = "الرقم السري غير صحيح";
                 }
             } else {
-                $error_message = "email '$email' does not found in db";
+                $error_message = "'$email' غير موجود فى الداتا بيز ";
             }
         }
         else
         {
-            $error_message = "Type Correct Email";
+            $error_message = " من فضلك اكتب ايميل صحيح";
         }
     }
     else
     {
-        $error_message = "Please Fill All Fields";
+        $error_message = "من فضلك قم بملأ جميع الحقول";
     }
     require BL . 'utils/error.php';
 }
@@ -73,12 +73,12 @@ if (isset($_POST['submit']))
     <div class="container-fluid">
         <div class="login p-4">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-                <h3>Login</h3>
+                <h3 class="text-end">تسجيل الدخول</h3>
                 <hr>
                 <input class="form-control mb-2" type="text" name="email" placeholder="Enter your email">
                 <input class="form-control mb-2" type="password" name="password" placeholder="Enter your password">
 
-                <button type="submit" name="submit" class="btn btn-danger">Login</button>
+                <button type="submit" name="submit" class="btn btn-danger w-100">تسجيل الدخول</button>
             </form>
         </div>
     </div>

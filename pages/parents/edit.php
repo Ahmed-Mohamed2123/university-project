@@ -27,7 +27,7 @@
 <!--  start main    -->
 <div class="main parent" id="main">
     <div class="pagesForm p-3">
-        <h3 class="mb-0 text-white">Edit parent information</h3>
+        <h3 class="mb-0 text-white text-end">تعديل صفحه ولي الامر</h3>
         <hr class="bg-white">
         <form method="post" action="<?php echo BASEURLPAGES . 'parents/update.php'; ?>">
             <input type="hidden" name="parent_id" value="<?php echo $parentId; ?>" class="form-control" >
@@ -57,9 +57,9 @@
             </div>
 
             <button
-                class="btn btn-danger"
+                class="btn btn-danger w-100"
                 type="submit"
-                name="submit">save</button>
+                name="submit">حفظ</button>
         </form>
     </div>
 </div>

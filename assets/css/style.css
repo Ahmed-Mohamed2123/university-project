@@ -251,6 +251,60 @@ html body {
   }
 }
 
+.main .content-info {
+  position: relative;
+  overflow: hidden;
+}
+
+.main .feature .content {
+  height: 240px;
+  padding: 0 15px;
+  border-radius: 8px;
+}
+
+.main .feature .one {
+  background-color: #000;
+  color: #FFF;
+}
+
+.main .feature .two {
+  background-color: #0b5ed7;
+  color: #FFF;
+}
+
+.main .feature .three {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.main .feature .four {
+  background-color: #0c4128;
+  color: #FFF;
+}
+
+.main .content-info .content-text {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+
+  color: #1e0808;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.main .content-info .content-img  img {
+  width: 100%;
+}
+
+@media (max-width: 767.98px){
+  .main .content-info {
+    position: inherit;
+  }
+
+  .main .content-info .content-text {
+    position: inherit;
+  }
+}
 .index, .school, .subject, .auth, .result, .parent, .profile, .checkout {
   height: calc(100vh - 94px);
 }

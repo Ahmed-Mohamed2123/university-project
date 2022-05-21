@@ -41,23 +41,24 @@
                     <div>
                         <button
                                 class="btn btn-primary"
-                                type="submit">search</button>
+                                type="submit">ابحث</button>
                     </div>
                 </div>
             </form>
         </div>
 
-        <table class="table">
-            <thead>
+        <div style="overflow-y: auto">
+            <table class="table">
+                <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">username</th>
-                    <th scope="col">address</th>
-                    <th scope="col">national_id</th>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">العنوان</th>
+                    <th scope="col">الرقم القومى</th>
                     <th scope="col">options</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <?php foreach ($data_pagination['data'] as $row) {  ?>
                     <tr>
                         <th scope="row"><?php echo $x; ?></th>
@@ -65,13 +66,14 @@
                         <td><?php echo $row['address']; ?></td>
                         <td><?php echo $row['national_id']; ?></td>
                         <td>
-                            <a href="<?php echo BASEURLPAGES.'parents/edit.php?id='.$row['id']; ?>" class="btn btn-primary">Edit</a>
-                            <a href="<?php echo BASEURLPAGES . 'parents/delete.php?id='.$row['id']; ?>" id="delete" class="btn btn-danger delete" >Delete</a>
+                            <a href="<?php echo BASEURLPAGES.'parents/edit.php?id='.$row['id']; ?>" class="btn btn-primary">تعديل</a>
+                            <a href="<?php echo BASEURLPAGES . 'parents/delete.php?id='.$row['id']; ?>" id="delete" class="btn btn-danger delete" >حذف</a>
                         </td>
                     </tr>
-                <?php $x++; } ?>
-            </tbody>
-        </table>
+                    <?php $x++; } ?>
+                </tbody>
+            </table>
+        </div>
 
         <nav class="d-flex justify-content-center" aria-label="Page navigation example">
             <ul class="pagination">

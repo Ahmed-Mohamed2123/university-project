@@ -46,141 +46,101 @@
 <!--  start main    -->
 <div class="main" id="main">
     <div class="ordersViewAll">
-        <table class="table table-hover" style="cursor: pointer">
-            <thead>
+        <div style="overflow-y: auto">
+            <table class="table table-hover" style="cursor: pointer">
+                <thead>
                 <tr>
                     <th scope="col">#</th>
                     <?php if ($role === 0) { ?>
-                    <th scope="col">order status</th>
+                        <th scope="col">حاله الطلب</th>
                     <?php } ?>
-                    <th scope="col">order date</th>
-                    <th scope="col">price</th>
-                    <th scope="col">name</th>
+                    <th scope="col">تاريخ الطلب</th>
+                    <th scope="col">السعر</th>
+                    <th scope="col">الاسم</th>
                     <?php if ($role === 0) { ?>
-                        <th scope="col">info</th>
+                        <th scope="col">الملاحظات</th>
                     <?php } ?>
                     <th scope="col">options</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <?php foreach ($data_pagination['data'] as $row) {  ?>
-                    <tr>
-                        <td><?php echo $x; ?></td>
-                        <?php if ($role === 0) { ?>
-                            <td>
-                                <?php
-                                    if (intval($row['order_status']) === 0) {
-                                        echo 'please waiting <img src=' . ASSETS . 'images/clock.png' . ' />';
-                                    } elseif (intval($row['order_status']) === 1) {
-                                        echo 'accepted <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
-                                    } elseif (intval($row['order_status']) === 2) {
-                                        echo 'rejected <img style="width:26px;height:26px" src=' . ASSETS . 'images/rejected.png' . ' />';
-                                    } elseif (intval($row['order_status']) === 3) {
-                                        echo 'accepted <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
-                                    }
-                                ?>
-                            </td>
-                        <?php } ?>
-                        <td><?php echo $row['order_date']; ?></td>
-                        <td><?php echo $row['price']; ?></td>
-                        <?php if ($role === 0) { ?>
-                            <td><?php echo $row['student_name']; ?></td>
-                        <?php } elseif ($role === 1) { ?>
-                            <td><?php echo $row['username']; ?></td>
-                        <?php } ?>
-
-                        <?php if ($role === 0) { ?>
-                            <td>
-                                <?php
-                                    if (intval($row['order_status']) === 0) {
-                                        echo 'The order may take a few hours, please wait.';
-                                    } elseif (intval($row['order_status']) === 1) {
-                                        echo 'Please complete the rest of the processes to get the required.';
-                                    } elseif (intval($row['order_status']) === 2) {
-                                        echo 'See the administration to find out the reason for the refusal.';
-                                    } elseif (intval($row['order_status']) === 3) {
-                                        echo 'All operations have been completed. You can view what you requested.';
-                                    }
-                                ?>
+                <tr>
+                    <td><?php echo $x; ?></td>
+                    <?php if ($role === 0) { ?>
+                        <td>
+                            <?php
+                            if (intval($row['order_status']) === 0) {
+                                echo 'من فضلك انتظر <img src=' . ASSETS . 'images/clock.png' . ' />';
+                            } elseif (intval($row['order_status']) === 1) {
+                                echo 'قبلت <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
+                            } elseif (intval($row['order_status']) === 2) {
+                                echo 'رفضت <img style="width:26px;height:26px" src=' . ASSETS . 'images/rejected.png' . ' />';
+                            } elseif (intval($row['order_status']) === 3) {
+                                echo 'قبلت <img style="width:26px;height:26px" src=' . ASSETS . 'images/accepted.png' . ' />';
+                            }
+                            ?>
                         </td>
-                        <?php } ?>
+                    <?php } ?>
+                    <td><?php echo $row['order_date']; ?></td>
+                    <td><?php echo $row['price']; ?></td>
+                    <?php if ($role === 0) { ?>
+                        <td><?php echo $row['student_name']; ?></td>
+                    <?php } elseif ($role === 1) { ?>
+                        <td><?php echo $row['username']; ?></td>
+                    <?php } ?>
+
+                    <?php if ($role === 0) { ?>
+                        <td>
+                            <?php
+                            if (intval($row['order_status']) === 0) {
+                                echo 'الطلب ربما سيأخذ بضع ساعات من فضلك انتظر';
+                            } elseif (intval($row['order_status']) === 1) {
+                                echo 'من فضلك اكمل باقى الخطوات لتأخذ طلبك';
+                            } elseif (intval($row['order_status']) === 2) {
+                                echo 'راجع الاداره لتعرف سبب الرفض';
+                            } elseif (intval($row['order_status']) === 3) {
+                                echo 'كل العمليات للطلب نجحت , واصبح طلبك متاح لك الآن';
+                            }
+                            ?>
+                        </td>
+                    <?php } ?>
                         <td>
                             <!--  for parent  -->
                             <?php if ($role === 0 && intval($row['order_status']) === 0) { ?>
-                                <a class="btn btn-danger" href="<?php echo BASEURLPAGES . 'orders/delete.php?id=' . $row['id'];?>">delete</a>
+                                <a class="btn btn-danger" href="<?php echo BASEURLPAGES . 'orders/delete.php?id=' . $row['id'];?>">احذف</a>
                             <?php } ?>
                             <?php if ($role === 0 && intval($row['order_status']) === 1) { ?>
-                                <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'orders/checkout.php?id=' . $row['id'] . '&price=' . $row['price'];?>">checkout</a>
+                                <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'orders/checkout.php?id=' . $row['id'] . '&price=' . $row['price'];?>">ادفع ثمن طلبك</a>
                             <?php } ?>
                             <?php if ($role === 0 && intval($row['order_status']) === 3) { ?>
-                                <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'orders/orderDetails.php?id=' . $row['id'];?>">open</a>
+                                <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'orders/orderDetails.php?id=' . $row['id'];?>">افتح صفحه المطلوب</a>
                             <?php } ?>
                             <!--  for employee  -->
                             <?php if ($role === 1) { ?>
                                 <?php if (
-                                        intval($row['order_status']) === 1 ||
-                                        intval($row['order_status']) === 0 ||
-                                        intval($row['order_status']) === 2) { ?>
+                                    intval($row['order_status']) === 1 ||
+                                    intval($row['order_status']) === 0 ||
+                                    intval($row['order_status']) === 2) { ?>
                                     <a
                                             class="btn btn-primary"
-                                            <?php if (intval($row['order_status']) === 1) {echo 'disabled="disabled"';} ?>
-                                            href="<?php echo BASEURLPAGES . 'orders/changeStatusOrder.php?request=accept&id=' . $row['id'];?>">accept</a>
+                                        <?php if (intval($row['order_status']) === 1) {echo 'disabled="disabled"';} ?>
+                                            href="<?php echo BASEURLPAGES . 'orders/changeStatusOrder.php?request=accept&id=' . $row['id'];?>">موافقه</a>
                                     <a
                                             class="btn btn-danger"
-                                            <?php if (intval($row['order_status']) === 2) {echo 'disabled="disabled"';} ?>
-                                            href="<?php echo BASEURLPAGES . 'orders/changeStatusOrder.php?request=reject&id=' . $row['id'];?>">reject</a>
+                                        <?php if (intval($row['order_status']) === 2) {echo 'disabled="disabled"';} ?>
+                                            href="<?php echo BASEURLPAGES . 'orders/changeStatusOrder.php?request=reject&id=' . $row['id'];?>">رفض</a>
+
+                                    <a
+                                            class="btn btn-success"
+                                            href="<?php echo BASEURLPAGES . 'orders/orderDetails.php?id=' . $row['id'];?>">اظهار الطلب</a>
                                 <?php } ?>
                             <?php }?>
-                            </td>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body" id="modalBody">
-                                        <div class="content-modal">
-                                            <h3>Invoice</h3>
-                                            <hr>
-                                            <div class="invoice-info">
-                                                <div class="item d-flex justify-content-between">
-                                                    <p class="lead">amount:_</p>
-                                                    <p>10</p>
-                                                </div>
-                                                <div class="item d-flex justify-content-between">
-                                                    <p class="lead">invoice.invoice_date:_</p>
-                                                    <p>11/2/2022</p>
-                                                </div>
-                                                <div class="item d-flex justify-content-between">
-                                                    <p class="lead">name parent:_</p>
-                                                    <p>Ahmed Mohamed</p>
-                                                </div>
-                                                <div class="item d-flex justify-content-between">
-                                                    <p class="lead">address</p>
-                                                    <p>mansoura</p>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="invoice_total d-flex justify-content-between">
-                                                <p class="lead">invoice_total</p>
-                                                <p class="fw-bold">50</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="printInvoice(this)">print</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </tr>
-                <?php $x++; } ?>
-            </tbody>
-        </table>
+                        </td>
+                    <?php $x++; } ?>
+                </tbody>
+            </table>
+        </div>
 
         <nav class="d-flex justify-content-center" aria-label="Page navigation example">
             <ul class="pagination">

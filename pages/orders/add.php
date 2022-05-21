@@ -50,8 +50,9 @@
         for ($i = 0; $i <= count($data_pagination['data']); $i++) {
             if ($i == $id) {
                 $_student_name = $data_pagination['data'][$i]['student_name'];
+                $_school_id = $data_pagination['data'][$i]['schoolId'];
                 $parentId = $_SESSION['id'];
-                $dataRow = getRow("SELECT MIN(`id`) FROM result WHERE `student_name` = '$_student_name'");
+                $dataRow = getRow("SELECT MIN(`id`) FROM result WHERE `student_name` = '$_student_name' AND `schoolId` = $_school_id");
                 foreach ($dataRow as $resultId) {
                     $result = db_insert("INSERT INTO `_order`
                         (`order_status`, `parentId`, `resultId`, `price`) VALUES
@@ -76,8 +77,8 @@
     <div class="addNewOrder">
 
         <div class="search d-flex justify-content-between align-items-center">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchStudentModal">custom search</button>
-            <p class="mb-0 fw-bold">Extracting the student's result <?php echo $resultPrice;?> egyptian pounds</p>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#searchStudentModal">ابحث من هنا</button>
+            <p class="mb-0 fw-bold">استخراج نتيجه الطالب ب  <?php echo $resultPrice;?> ج مصرى</p>
         </div>
 
         <?php if ($data_pagination['data'] !== NULL) { ?>
@@ -85,7 +86,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">student_name</th>
+                        <th scope="col">اسم الطالب</th>
                         <th scope="col">options</th>
                     </tr>
                 </thead>
@@ -93,10 +94,11 @@
                     <?php foreach ($data_pagination['data'] as $row) {  ?>
                         <?php
                         $student_name_value = $row['student_name'];
+                        $schoolId_value = $row['schoolId'];
                         $isExist = getRow("
                                     SELECT `student_name` FROM _order  
                                     LEFT JOIN result ON result.id = _order.resultId
-                                    WHERE `student_name` = '$student_name_value'");
+                                    WHERE `student_name` = '$student_name_value' AND `schoolId` = $schoolId_value");
 
                         ?>
                         <tr>
@@ -112,7 +114,7 @@
                                     }?>"
                                     <?php if ($isExist > 0) { echo 'disabled'; }?>
                                     data-bs-toggle="modal"
-                                    data-bs-target="#requestOrderModal<?php echo $x;?>">request order</button>
+                                    data-bs-target="#requestOrderModal<?php echo $x;?>">انشاء طلب</button>
                             </td>
 
                             <!-- Modal requestOrder -->
@@ -121,19 +123,19 @@
                                     <form action="<?php echo '?page=1&school_id='.$_GET['school_id'];?>&grade=<?php echo $_GET['grade'];?>&semester=<?php echo $_GET['semester']; ?>&student_name=<?php echo $_GET['student_name']; ?>&sitting_number=<?php echo $_GET['sitting_number'];?>&submit=; ?>" method="post">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel1">request order</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel1">انشاء طلب</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" id="modalBody1">
                                                 <input type="hidden" name="id" value="<?php echo $x; ?>">
-                                                <div class="content-modal">
+                                                <div class="content-modal text-end">
                                                     <!--                                                    <p>item price <span class="text-danger">--><?php //echo '';?><!--</span></p>-->
-                                                    <p>Are you sure to create the request?</p>
+                                                    <p>هل انت متأكد من انشاء هذا الطلب؟</p>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" name="order_submit" class="btn btn-primary">request order</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لا</button>
+                                                <button type="submit" name="order_submit" class="btn btn-primary">نعم</button>
                                             </div>
                                         </div>
                                     </form>
@@ -219,8 +221,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="submit" class="btn btn-primary">search</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلق النافذه</button>
+                    <button type="submit" name="submit" class="btn btn-primary">ابحث</button>
                 </div>
             </form>
         </div>

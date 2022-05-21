@@ -38,7 +38,7 @@
                     <div>
                         <button
                                 class="btn btn-primary"
-                                type="submit">search</button>
+                                type="submit">ابحث</button>
                     </div>
                 </div>
             </form>
@@ -47,7 +47,7 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">subject name</th>
+                    <th scope="col">اسم الماده</th>
                     <th scope="col">options</th>
                 </tr>
             </thead>
@@ -57,8 +57,8 @@
                         <th scope="row"><?php echo $x; ?></th>
                         <td><?php echo $row['subject_name']; ?></td>
                         <td>
-                            <a href="<?php echo BASEURLPAGES.'subjects/edit.php?id='.$row['id']; ?>" class="btn btn-primary">Edit</a>
-                            <a href="<?php echo BASEURLPAGES . 'subjects/delete.php?id='.$row['id']; ?>" id="delete" class="btn btn-danger delete" >Delete</a>
+                            <a href="<?php echo BASEURLPAGES.'subjects/edit.php?id='.$row['id']; ?>" class="btn btn-primary">تعديل</a>
+                            <a href="<?php echo BASEURLPAGES . 'subjects/delete.php?id='.$row['id']; ?>" id="delete" class="btn btn-danger delete" >حذف</a>
                         </td>
                     </tr>
                 <?php $x++; } ?>

@@ -71,7 +71,7 @@
                 $error_message = $result['message'];
             }
         } else {
-            $error_message = 'Please Fill All Field';
+            $error_message = 'من فضلك املأ جميع الحقول';
         }
     }
 
@@ -180,7 +180,7 @@
                                 $employeeId = $_SESSION['id'];
 
                                 $_sql = "select $subjects_names_modify =>>>> $val_modify => $_student_name => $maxDegrees_modify => $minDegrees_modify => " . '<br>';
-                                $studentExist = getRow("select * from result WHERE `student_name` ='$_student_name' AND `subjectId`= $subject_id");
+                                $studentExist = getRow("select * from result WHERE `student_name` ='$_student_name' AND `subjectId`= $subject_id AND 'schoolId' = $school_id");
                                 if (!$studentExist) {
                                     $insertResultSql =
                                         "INSERT INTO `result`
@@ -319,13 +319,13 @@
                 <button
                         class="btn btn-danger"
                         name="submit"
-                        type="submit">save</button>
+                        type="submit">حفظ</button>
 
                 <button
                         class="btn btn-primary"
                         type="button"
                         data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">add sheet excel</button>
+                        data-bs-target="#exampleModal">اضافه ملف اكسيل</button>
             </div>
 
         </form>
@@ -344,7 +344,7 @@
             <?php } ?>
             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">add sheet excel</h5>
+                    <h5 class="modal-title text-end" id="exampleModalLabel">اضافه ملف اكسيل</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -359,8 +359,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" name="submit_file" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلق النافذه</button>
+                    <button type="submit" name="submit_file" class="btn btn-primary">حفظ</button>
                 </div>
             </form>
         </div>
