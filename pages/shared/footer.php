@@ -3,7 +3,7 @@
         <button onclick="closeSidebar()" class="btn-close"></button>
 
         <div class="logo mb-4">
-            <img src="<?php echo ASSETS . 'images/_logo.png'?>" alt="">
+            <img src="<?php echo ASSETS . 'images/logo.png'?>" alt="">
         </div>
 
         <div class="sidebar-content">

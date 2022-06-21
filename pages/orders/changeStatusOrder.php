@@ -12,7 +12,7 @@
         if ($typeRequest === 'reject') {
             $result_reject = db_update("UPDATE `_order` SET `order_status`= 2 WHERE `id`=$orderId");
             if ($result_reject['boolean'] === true) {
-                $success_message = $result_reject['message'];
+                $success_message = 'تم رفض الطلب المقدم بنجاح';
                 header( "refresh:2;url=".BASEURLPAGES."orders/viewAll.php");
             } else {
                 $error_message = $result_reject['message'];
@@ -20,7 +20,7 @@
         } elseif ($typeRequest === 'accept') {
             $result_accept = db_update("UPDATE `_order` SET `order_status`= 1 WHERE `id`=$orderId");
             if ($result_accept['boolean'] === true) {
-                $success_message = $result_accept['message'];
+                $success_message = 'تمت الموافقه على الطلب بنجاح';
                 header( "refresh:2;url=".BASEURLPAGES."orders/viewAll.php");
             } else {
                 $error_message = $result_accept['message'];

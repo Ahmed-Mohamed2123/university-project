@@ -43,8 +43,11 @@
                     <div class="student_name fw-bold mb-3">
                         <?php echo $order['student_name'];?>
                     </div>
-
-                    <p><?php echo $payment['paymentMethod'];?> _:نوع وسيله الدفع </p>
+                    <?php if (intval($_SESSION['role']) === 0) { ?>
+                        <p><?php echo $payment['paymentMethod'];?> _:نوع وسيله الدفع </p>
+                    <?php } else { ?>
+                        <p style="direction: rtl"><?php echo $payment['paymentMethod'];?> طلب استخراج نتيجه باسم :_ </p>
+                    <?php } ?>
                 </div>
 
                 <table class="table table-responsive table-bordered">
@@ -95,13 +98,15 @@
                 </table>
             </div>
 
-            <div class="d-flex justify-content-between flex-wrap">
-                <button
-                        data-bs-toggle="modal" data-bs-target="#invoice"
-                        class="btn btn-success">اظهار الفاتوره</button>
+            <?php if (intval($_SESSION['role']) === 0) { ?>
+                <div class="d-flex justify-content-between flex-wrap">
+                    <button
+                            data-bs-toggle="modal" data-bs-target="#invoice"
+                            class="btn btn-success">اظهار الفاتوره</button>
 
-                <button class="btn btn-success" onclick="printOrderDetail(this)">اطبع</button>
-            </div>
+                    <button class="btn btn-success" onclick="printOrderDetail(this)">اطبع</button>
+                </div>
+            <?php } ?>
 
             <!-- Modal -->
             <div class="modal fade" id="invoice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

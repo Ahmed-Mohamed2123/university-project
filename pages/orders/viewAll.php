@@ -44,10 +44,11 @@
 ?>
 
 <!--  start main    -->
-<div class="main" id="main">
-    <div class="ordersViewAll">
-        <div style="overflow-y: auto">
-            <table class="table table-hover" style="cursor: pointer">
+<div class="main" id="main" style="background-image: url(<?php echo ASSETS . 'images/orders.jpg'?>)">
+    <div class="ordersViewAll" style="height: calc(100vh - 94px);">
+        <?php if ($data_pagination['data'] != null) { ?>
+            <div style="overflow-y: auto;background-color: #ffffff87;">
+            <table class="table table-hover text-black" style="cursor: pointer">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -134,40 +135,46 @@
                                     <a
                                             class="btn btn-success"
                                             href="<?php echo BASEURLPAGES . 'orders/orderDetails.php?id=' . $row['id'];?>">اظهار الطلب</a>
+                                <?php } else { ?>
+                                    <p>تمت كافه العمليات للطلب</p>
                                 <?php } ?>
                             <?php }?>
                         </td>
                     <?php $x++; } ?>
                 </tbody>
             </table>
-        </div>
 
-        <nav class="d-flex justify-content-center" aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a <?php ($data_pagination['currentPage'] == $data_pagination['firstPage'] ? print 'disabled="disabled"' : '')?>
-                            class="page-link"
-                            href="?page=<?php echo $data_pagination['firstPage'] ?>" tabindex="-1" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
 
-                <!-- Links of the pages with page number -->
-                <?php for($i = $data_pagination['start']; $i <= $data_pagination['end']; $i++) { ?>
-                    <li class='page-item <?php ($i == $data_pagination['currentPage'] ? print 'active' : '')?>'>
-                        <a class='page-link' href='?page=<?php echo $i;?>'><?php echo $i;?></a>
+            <nav class="d-flex justify-content-center" aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a <?php ($data_pagination['currentPage'] == $data_pagination['firstPage'] ? print 'disabled="disabled"' : '')?>
+                                class="page-link"
+                                href="?page=<?php echo $data_pagination['firstPage'] ?>" tabindex="-1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
                     </li>
-                <?php } ?>
 
-                <li class="page-item">
-                    <a <?php ($data_pagination['currentPage'] >= $data_pagination['total_pages'] ? print 'disabled="disabled"' : '')?>
-                            class="page-link"
-                            href="?page=<?php echo $data_pagination['lastPage'] ?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                    <!-- Links of the pages with page number -->
+                    <?php for($i = $data_pagination['start']; $i <= $data_pagination['end']; $i++) { ?>
+                        <li class='page-item <?php ($i == $data_pagination['currentPage'] ? print 'active' : '')?>'>
+                            <a class='page-link' href='?page=<?php echo $i;?>'><?php echo $i;?></a>
+                        </li>
+                    <?php } ?>
+
+                    <li class="page-item">
+                        <a <?php ($data_pagination['currentPage'] >= $data_pagination['total_pages'] ? print 'disabled="disabled"' : '')?>
+                                class="page-link"
+                                href="?page=<?php echo $data_pagination['lastPage'] ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <?php } else { ?>
+            <h2 class="text-black text-end"><?php echo 'لا يوجد طلبات للعملاء حتى الان'; ?></h2>
+        <?php } ?>
     </div>
 </div>
 <!--  End main    -->

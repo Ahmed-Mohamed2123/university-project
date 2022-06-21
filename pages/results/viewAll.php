@@ -67,7 +67,7 @@
         for ($i = 0; $i <= count($data_pagination['data']); $i++) {
             if (!empty($data_pagination['data'][$i])) {
                 $students_names = $data_pagination['data'][$i]['student_name'];
-                $resultSql = "SELECT `subject_name`, `degree`, `max_degree`, `min_degree` FROM `result` LEFT JOIN subject ON result.subjectId = subject.id WHERE `student_name` = '$students_names'";
+                $resultSql = "SELECT `subject_name`, `degree`, `max_degree`, `min_degree`, `schoolId` FROM `result` LEFT JOIN subject ON result.subjectId = subject.id WHERE `student_name` = '$students_names' AND `schoolId` = $school_id";
                 $subject_data[] = getResults($resultSql);
             }
         }

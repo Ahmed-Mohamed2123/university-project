@@ -142,7 +142,7 @@ function paginationResult($table, $limit, $conditionCount, $conditionOrRestSql) 
     $startFrom = ($currentPage * $limit) - $limit;
     // fetch data with specific limit
     // LIMIT offset, count
-    $tableSQL = "SELECT DISTINCT(`student_name`), `semester`, `grade`, `school_year`, `sitting_number`, `school_name` FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
+    $tableSQL = "SELECT DISTINCT(`student_name`), `semester`, `grade`, `school_year`, `sitting_number`, `school_name`, `schoolId` FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
     return paginationOperations("DISTINCT `student_name`", $table, $limit, $conditionCount, $conditionOrRestSql, $tableSQL, $currentPage);
 }
 
@@ -156,7 +156,7 @@ function paginationOrder($table, $limit, $conditionCount, $conditionOrRestSql) {
     $startFrom = ($currentPage * $limit) - $limit;
     // fetch data with specific limit
     // LIMIT offset, count
-    $tableSQL = "SELECT DISTINCT(`student_name`), `schoolId` FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
+    $tableSQL = "SELECT DISTINCT(`student_name`), `schoolId`, `sitting_number` FROM `$table` $conditionOrRestSql LIMIT $startFrom,$limit";
     return paginationOperations("DISTINCT `student_name`", $table, $limit, $conditionCount, $conditionOrRestSql, $tableSQL, $currentPage);
 }
 

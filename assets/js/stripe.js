@@ -33,7 +33,7 @@ if (document.location.pathname.includes('/checkout')) {
     card.addEventListener('change', function(event) {
         const displayError = document.getElementById('card-errors');
         if (event.error) {
-            displayError.textContent = event.error.message;
+            displayError.textContent = 'رقم بطاقتك غير صالح.';
         } else {
             displayError.textContent = '';
         }
@@ -48,7 +48,7 @@ if (document.location.pathname.includes('/checkout')) {
             if (result.error) {
                 // Inform the user if there was an error.
                 const errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
+                errorElement.textContent = 'يجب ان تملأ بيانات البطاقه';
             } else {
                 // Send the token to your server.
                 stripeTokenHandler(result.token);

@@ -69,16 +69,25 @@ if (isset($_POST['submit']))
 
 
 <!--  start main    -->
-<div class="main auth" id="main">
+<div class="main auth" id="main" style="background-image: url(<?php echo ASSETS . 'images/login.jpg'?>)">
     <div class="container-fluid">
         <div class="login p-4">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 <h3 class="text-end">تسجيل الدخول</h3>
                 <hr>
-                <input class="form-control mb-2" type="text" name="email" placeholder="Enter your email">
-                <input class="form-control mb-2" type="password" name="password" placeholder="Enter your password">
+                <div class="loginInput form-group position-relative">
+                    <i class="icon fa-solid fa-user position-absolute" style="color: #000"></i>
+                    <input class="form-control mb-2" type="text" name="email" placeholder="Enter your email">
+                </div>
 
-                <button type="submit" name="submit" class="btn btn-danger w-100">تسجيل الدخول</button>
+                <div class="loginInput form-group position-relative">
+                    <i class="icon fa-solid fa-unlock-keyhole position-absolute" style="color: #000"></i>
+                    <input class="form-control mb-2" type="password" name="password" placeholder="Enter your password">
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" name="submit" class="btn btn-danger w-50">تسجيل الدخول</button>
+                </div>
             </form>
         </div>
     </div>

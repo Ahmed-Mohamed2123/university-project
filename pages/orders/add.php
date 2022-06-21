@@ -12,6 +12,7 @@
     );
 
     $data_pagination = NULL;
+    $sitting_number = NULL;
     $x=0;
     $limit = 5;
     $resultPrice = 30;
@@ -46,9 +47,9 @@
     }
 
     if (isset($_POST['order_submit'])) {
-        $id = $_POST['id'];
         for ($i = 0; $i <= count($data_pagination['data']); $i++) {
-            if ($i == $id) {
+            $sitting_number = $_POST['id'];
+            if ($data_pagination['data'][$i]['sitting_number'] == $sitting_number) {
                 $_student_name = $data_pagination['data'][$i]['student_name'];
                 $_school_id = $data_pagination['data'][$i]['schoolId'];
                 $parentId = $_SESSION['id'];
@@ -114,20 +115,20 @@
                                     }?>"
                                     <?php if ($isExist > 0) { echo 'disabled'; }?>
                                     data-bs-toggle="modal"
-                                    data-bs-target="#requestOrderModal<?php echo $x;?>">انشاء طلب</button>
+                                    data-bs-target="#req<?php echo $row['sitting_number'];?>">انشاء طلب</button>
                             </td>
 
                             <!-- Modal requestOrder -->
-                            <div class="modal fade" id="requestOrderModal<?php echo $x?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="req<?php echo $row['sitting_number']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="<?php echo '?page=1&school_id='.$_GET['school_id'];?>&grade=<?php echo $_GET['grade'];?>&semester=<?php echo $_GET['semester']; ?>&student_name=<?php echo $_GET['student_name']; ?>&sitting_number=<?php echo $_GET['sitting_number'];?>&submit=; ?>" method="post">
+                                    <form action="<?php echo '?page=' .$_GET['page'] . '&school_id='.$_GET['school_id'];?>&grade=<?php echo $_GET['grade'];?>&semester=<?php echo $_GET['semester']; ?>&student_name=<?php echo $_GET['student_name']; ?>&sitting_number=<?php echo $_GET['sitting_number'];?>&submit=; ?>" method="post">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel1">انشاء طلب</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" id="modalBody1">
-                                                <input type="hidden" name="id" value="<?php echo $x; ?>">
+                                                <input type="hidden" name="id" value="<?php echo $row['sitting_number']; ?>">
                                                 <div class="content-modal text-end">
                                                     <!--                                                    <p>item price <span class="text-danger">--><?php //echo '';?><!--</span></p>-->
                                                     <p>هل انت متأكد من انشاء هذا الطلب؟</p>

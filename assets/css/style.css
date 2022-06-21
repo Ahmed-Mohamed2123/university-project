@@ -1,5 +1,5 @@
 html body {
-  background-color: #ededed;
+  background-color: #ffc8c86b;
   position: relative;
 }
 
@@ -8,7 +8,7 @@ html body {
   position: absolute;
   right: 12px;
   top: 12px;
-  background-color: #ffffff;
+  background-color: #d7dbe3;
   border-radius: 8px;
   transition: width .5s ease-in-out;
   z-index: 1;
@@ -34,7 +34,7 @@ html body {
 }
 
 .header .header-content .header-content-left .project-name a {
-  color: #575656;
+  color: #32264b;
   font-weight: bold;
   font-size: 20px;
 }
@@ -89,7 +89,7 @@ html body {
   top: 12px;
   /*left: -100%;*/
   height: 100%;
-  background-color: #fff;
+  background-color: #d7dbe3;
   overflow-x: hidden;
   transition: all 0.5s ease-in-out;
   border-top-left-radius: 8px;
@@ -157,7 +157,7 @@ html body {
   text-decoration: none;
   padding: 8px 8px 8px 17px;
   font-size: 18px;
-  color: #575656;
+  color: #32264b;
   transition: all 0.3s ease-in-out;
   margin-bottom: 0;
 }
@@ -305,8 +305,21 @@ html body {
     position: inherit;
   }
 }
+.auth {
+  background-size: cover;
+}
+.index {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.index .content-text {
+  font-size: 18px;
+}
 .index, .school, .subject, .auth, .result, .parent, .profile, .checkout {
   height: calc(100vh - 94px);
+}
+.profile {
+  background-color: #d7dbe3;
 }
 /*end main*/
 

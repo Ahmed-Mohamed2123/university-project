@@ -19,6 +19,7 @@
         $result = db_update($sql);
 
         if ($result['boolean'] === true) {
+            $_SESSION['username'] = $username;
             $success_message = $result['message'];
             header( "refresh:2;url=".BASEURLPAGES."index.php");
         } else {

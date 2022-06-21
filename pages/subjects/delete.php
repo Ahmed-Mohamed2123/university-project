@@ -10,16 +10,15 @@
         header('location:' . BASEURLPAGES . 'auth/login.php');
     }
 
-    if (isset($_POST['submit'])) {
-        $subject_id = $_POST['subject_id'];
+    if(isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $subject_id = $_GET['id'];
 
-        $name = sanitizeString($_POST['name']);
-
-        $sql = "UPDATE subject SET `subject_name`='$name' WHERE `id`= $subject_id ";
-        $result = db_update($sql);
+        $sql = "DELETE FROM `subject` WHERE `id`= $subject_id ";
+        $result = deleteRow($sql);
 
         if ($result['boolean'] === true) {
             $success_message = $result['message'];
+
             header( "refresh:2;url=".BASEURLPAGES."subjects/viewAll.php");
         } else {
             $error_message = $result['message'];

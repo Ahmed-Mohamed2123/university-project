@@ -105,7 +105,7 @@ require BL . 'utils/error.php';
 ?>
 
 <!--  start main    -->
-<div class="main auth" id="main">
+<div class="main auth" id="main" style="background-image: url(<?php echo ASSETS . 'images/register.jpg'?>)">
     <div class="container-fluid">
         <div class="register p-4">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">

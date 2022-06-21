@@ -37,44 +37,48 @@
             checkEmpty($max_degree) &&
             checkEmpty($min_degree)
         ) {
+            $_studentExist = getRow("select * from result WHERE `student_name` ='$student_name' AND `schoolId` = $school_Id AND `subjectId` = $subject_Id");
 
-            $sql = "INSERT INTO result (
-                    `student_name`,
-                    `semester`,
-                    `grade`,
-                    `school_year`,
-                    `sitting_number`,
-                    `degree`,
-                    `max_degree`,
-                    `min_degree`,
-                    `subjectId`,
-                    `schoolId`,
-                    `employeeId`) 
-                    VALUES (
-                            '$student_name',
-                            '$semester',
-                            '$grade',
-                            '$school_year',
-                            $sitting_number,
-                            $degree,
-                            $max_degree,
-                            $min_degree,
-                            $subject_Id,
-                            $school_Id,
-                            $employee_id
-                            )";
-            $result = db_insert($sql);
+            if (!$_studentExist) {
+                $sql = "INSERT INTO result (
+                `student_name`,
+                `semester`,
+                `grade`,
+                `school_year`,
+                `sitting_number`,
+                `degree`,
+                `max_degree`,
+                `min_degree`,
+                `subjectId`,
+                `schoolId`,
+                `employeeId`) 
+                VALUES (
+                        '$student_name',
+                        '$semester',
+                        '$grade',
+                        '$school_year',
+                        $sitting_number,
+                        $degree,
+                        $max_degree,
+                        $min_degree,
+                        $subject_Id,
+                        $school_Id,
+                        $employee_id
+                        )";
+                $result = db_insert($sql);
 
-            if ($result['boolean'] === true) {
-                $success_message = $result['message'];
-            } else {
-                $error_message = $result['message'];
+                if ($result['boolean'] === true) {
+                    $success_message = $result['message'];
+                } else {
+                    $error_message = $result['message'];
+                }
+            } {
+                $error_message = 'هذا الطالب مسجل فى مدرسه اخرى من قبل , وبالتالى لا يمكن له التسجيل فى مدرسه مع مدرسته.';
             }
         } else {
             $error_message = 'من فضلك املأ جميع الحقول';
         }
     }
-
 
     if (isset($_POST['submit_file'])) {
         if (isset($_FILES['uploadFile']['name']) && $_FILES['uploadFile']['name'] != "") {
@@ -132,6 +136,7 @@
                     // check is exist subject in db and if it does not exist will be added to the db
                     for ($r = 0 ; $r <= count($subjects_names[0]); $r++) {
                         // I added condition because I need value of subjects_names != NULL
+                        $values = null;
                         if (!empty($subjects_names[0][$r])) {
                             $values = $subjects_names[0][$r];
                         }
@@ -145,14 +150,12 @@
                         }
                     }
 
-
                     // check is exist school in db and if it does not exist will be added to the db
                     $findSchoolByName = "SELECT `school_name` FROM `school` WHERE `school_name` = '$_school_name'";
                     if (!getRow($findSchoolByName)) {
                         $insertSchoolSql = "INSERT INTO `school` (`school_name`) VALUES ('$_school_name')";
                         db_insert($insertSchoolSql);
                     }
-
 
                     $getSchoolId = "SELECT `id` from `school` WHERE `school_name` = '$_school_name'";
                     $school_id = intval(implode('',getRow($getSchoolId)));
@@ -179,55 +182,59 @@
 
                                 $employeeId = $_SESSION['id'];
 
-                                $_sql = "select $subjects_names_modify =>>>> $val_modify => $_student_name => $maxDegrees_modify => $minDegrees_modify => " . '<br>';
-                                $studentExist = getRow("select * from result WHERE `student_name` ='$_student_name' AND `subjectId`= $subject_id AND 'schoolId' = $school_id");
-                                if (!$studentExist) {
+                                $studentExistInDatabase = getRow("select * from result WHERE `student_name` ='$_student_name' AND `schoolId` = $school_id AND `subjectId` = $subject_id");
+                                // if student exist database
+                                if (!$studentExistInDatabase) {
                                     $insertResultSql =
                                         "INSERT INTO `result`
-                                        (
-                                         `student_name`,
-                                         `semester`,
-                                         `grade`,
-                                         `school_year`,
-                                         `sitting_number`,
-                                         `degree`,
-                                         `max_degree`,
-                                         `min_degree`,
-                                         `subjectId`,
-                                         `schoolId`,
-                                         `employeeId`) VALUES (
-                                                     '$_student_name',
-                                                     '$_semester',
-                                                     '$_grade',
-                                                     '$_school_year',
-                                                     $_sitting_number,
-                                                     $val_modify,
-                                                     $maxDegrees_modify,
-                                                     $minDegrees_modify,
-                                                     $subject_id,
-                                                     $school_id,
-                                                     $employeeId)";
+                                    (
+                                     `student_name`,
+                                     `semester`,
+                                     `grade`,
+                                     `school_year`,
+                                     `sitting_number`,
+                                     `degree`,
+                                     `max_degree`,
+                                     `min_degree`,
+                                     `subjectId`,
+                                     `schoolId`,
+                                     `employeeId`) VALUES (
+                                                 '$_student_name',
+                                                 '$_semester',
+                                                 '$_grade',
+                                                 '$_school_year',
+                                                 $_sitting_number,
+                                                 $val_modify,
+                                                 $maxDegrees_modify,
+                                                 $minDegrees_modify,
+                                                 $subject_id,
+                                                 $school_id,
+                                                 $employeeId)";
                                     $resultInsertResult = db_insert($insertResultSql);
-
                                     if ($resultInsertResult['boolean'] === true) {
-                                        unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
                                         $success_message = $resultInsertResult['message'];
-
+                                        unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
                                     } else {
                                         unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
                                         $error_message = $resultInsertResult['message'];
                                     }
                                 } else {
-                                    unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
+                                    $success_message = 'تم اضافه كافه البيانات.';
                                 }
 
+                            } else {
+                                unlink(BL . 'uploads/' . $_FILES['uploadFile']['name']);
                             }
                         }
                     }
                 }
             }
+
+        } else {
+            $error_message = 'ادخل الملف المطلوب.';
         }
     }
+
     require BLP . 'shared/loading.php';
     require BL . 'utils/error.php';
 ?>
@@ -235,7 +242,7 @@
 <!--  start main    -->
 <div class="main" id="main">
     <div class="add-result p-3">
-        <h3 class="mb-0 text-white">Add new result</h3>
+        <h3 class="mb-0 text-black" style="direction: rtl">اضافه نتيجه</h3>
         <hr class="bg-white">
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <div class="mb-2">
@@ -360,7 +367,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلق النافذه</button>
-                    <button type="submit" name="submit_file" class="btn btn-primary">حفظ</button>
+                    <button
+                            type="submit"
+                            name="submit_file"
+                            class="btn btn-primary">حفظ</button>
                 </div>
             </form>
         </div>

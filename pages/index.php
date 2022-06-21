@@ -9,7 +9,7 @@
 ?>
 
     <!--  start main    -->
-    <div class="main index" id="main">
+    <div class="main index" id="main" style="background-image: url(<?php echo ASSETS . 'images/_parent.jpg'?>)">
         <div class="container-fluid">
             <div class="dashboard-content" id="dashboard-content">
 <!--               <div class="d-flex justify-content-around flex-wrap">-->
@@ -25,25 +25,25 @@
 <!--               </div>-->
 
                 <?php if (intval($_SESSION['role']) === 0) { ?>
-                    <div class="content-parent text-end fw-bold text-black">
-                        يمكنك اجراء طلب استخراج نتيجه ابنك من خلال الضغط على <a href="<?php echo BASEURLPAGES . 'orders/add.php';?>">انشاء طلب</a>
+                    <div class="content-text text-end fw-bold text-white">
+                        يمكنك اجراء طلب استخراج نتيجه ابنك من خلال الضغط على <a class="text-white" href="<?php echo BASEURLPAGES . 'orders/add.php';?>">انشاء طلب</a>
                     </div>
                 <?php }?>
 
                 <?php if (intval($_SESSION['role']) === 1) { ?>
-                    <div class="content-parent text-end fw-bold text-black">
-                        مرحبا بك , انت جزأ من فريق العمل معنا , ونحن نقدر جهوداتك ,, يمكنك الدخول الى صفحه الطلبات من هنا <a href="<?php echo BASEURLPAGES . 'orders/viewAll.php';?>">الطلبات</a>
+                    <div class="content-text text-end fw-bold text-white">
+                        مرحبا بك , انت جزأ من فريق العمل معنا , ونحن نقدر جهوداتك ,, يمكنك الدخول الى صفحه الطلبات من هنا <a class="text-white" href="<?php echo BASEURLPAGES . 'orders/viewAll.php';?>">الطلبات</a>
                     </div>
                 <?php }?>
 
                 <div class="background-image">
-                    <?php if (intval($_SESSION['role']) === 0) { ?>
-                        <img src="<?php echo ASSETS . 'images/Electronic-management.jpg'?>" alt="">
-                    <?php }?>
+<!--                    --><?php //if (intval($_SESSION['role']) === 0) { ?>
+<!--                        <img src="--><?php //echo ASSETS . 'images/Electronic-management.jpg'?><!--" alt="">-->
+<!--                    --><?php //}?>
 
-                    <?php if (intval($_SESSION['role']) === 1) { ?>
-                        <img src="<?php echo ASSETS . 'images/employee.png'?>" alt="">
-                    <?php }?>
+<!--                    --><?php //if (intval($_SESSION['role']) === 1) { ?>
+<!--                        <img src="--><?php //echo ASSETS . 'images/employee.png'?><!--" alt="">-->
+<!--                    --><?php //}?>
                 </div>
             </div>
         </div>
