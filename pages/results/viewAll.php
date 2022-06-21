@@ -196,8 +196,8 @@
                             <td><?php echo floor((array_sum($total_max_degree) / array_sum($total)) * 100) . '%'; ?></td>
 
                             <td>
-                                <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'results/edit.php?sitting_number=' . $row['sitting_number'];?>">تعديل</a>
-                                <a class="btn btn-danger" href="<?php echo BASEURLPAGES . 'results/delete.php?sitting_number=' . $row['sitting_number'];?>">حذف</a>
+                                <a class="btn btn-primary" href="<?php echo BASEURLPAGES . 'results/edit.php?sitting_number=' . $row['sitting_number'] . '&schoolId=' . $_GET['school_id'];?>">تعديل</a>
+                                <a class="btn btn-danger" href="<?php echo BASEURLPAGES . 'results/delete.php?sitting_number=' . $row['sitting_number'] . '&schoolId=' . $_GET['school_id'];?>">حذف</a>
                             </td>
                         </tr>
                         <?php $x++; } ?>

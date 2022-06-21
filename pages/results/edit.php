@@ -13,17 +13,18 @@
     $student_name = NULL;
     $modified_degree = [];
     $sitting_number = NULL;
+    $schoolId = NULL;
 
-    if (isset($_GET['sitting_number']) && is_numeric($_GET['sitting_number'])) {
+    if (isset($_GET['sitting_number']) && is_numeric($_GET['sitting_number']) &&
+        isset($_GET['schoolId']) && is_numeric($_GET['schoolId'])) {
         $sitting_number = $_GET['sitting_number'];
-
-        $getStudentName = getRow("SELECT DISTINCT(`student_name`) FROM `result` WHERE result.sitting_number = $sitting_number");
-        $student_name = $getStudentName['student_name'];
-
-        $resultSql = "SELECT `subject_name`, `degree`, `max_degree`, `min_degree`, result.id FROM `result` LEFT JOIN subject ON result.subjectId = subject.id WHERE `student_name` = '$student_name'";
+        $schoolId = $_GET['schoolId'];
+        $getStudent = getRow("SELECT DISTINCT(`student_name`) FROM `result` WHERE result.sitting_number = $sitting_number AND `schoolId` = $schoolId");
+        $student_name = $getStudent['student_name'];
+        $resultSql = "SELECT `subject_name`, `degree`, `max_degree`, `min_degree`, result.id FROM `result` LEFT JOIN subject ON result.subjectId = subject.id WHERE `student_name` = '$student_name' AND `schoolId` = $schoolId";
         $subject_data[] = getResults($resultSql);
 
-        if ($getStudentName['boolean'] === false && count($subject_data) <= 0) {
+        if ($getStudent['boolean'] === false && count($subject_data) <= 0) {
             header('location:' . BASEURLPAGES . 'results/viewAll.php');
         }
 
@@ -37,6 +38,7 @@
         <div class="p-3">
             <form  method="post" action="<?php echo BASEURLPAGES . 'results/update.php'; ?>">
                 <input type="hidden" name="sitting_number" value="<?php echo $sitting_number; ?>" class="form-control" >
+                <input type="hidden" name="schoolId" value="<?php echo $schoolId; ?>" class="form-control" >
                 <div class="row">
                     <div class="col-md-6">
                         <input

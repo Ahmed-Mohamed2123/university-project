@@ -9,11 +9,14 @@
         header('location:' . BASEURLPAGES . 'auth/login.php');
     }
 
-    if(isset($_GET['sitting_number']) && is_numeric($_GET['sitting_number']))
+    if(isset($_GET['sitting_number']) && is_numeric($_GET['sitting_number']) &&
+
+    isset($_GET['schoolId']) && is_numeric($_GET['schoolId']))
     {
         $sitting_number = $_GET['sitting_number'];
+        $schoolId = $_GET['schoolId'];
 
-        $student_name = getRow("SELECT DISTINCT(`student_name`) FROM `result` WHERE result.sitting_number = $sitting_number")['student_name'];
+        $student_name = getRow("SELECT DISTINCT(`student_name`) FROM `result` WHERE result.sitting_number = $sitting_number AND `schoolId` = $schoolId")['student_name'];
         $resultSql = "SELECT result.id FROM `result` WHERE `student_name` = '$student_name'";
         $subject_data = getResults($resultSql);
 
